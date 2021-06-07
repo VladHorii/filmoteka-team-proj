@@ -42,8 +42,14 @@
     <path d="M8 22L22 8" stroke="black" stroke-width="2"/>
 </symbol>
 
-<symbol id="icon-pagination" viewBox="0 0 40 40">
+<symbol id="icon-pagination-right" viewBox="0 0 40 40">
     <rect width="40" height="40" rx="5" transform="matrix(-1 0 0 1 40 0)" fill="#F7F7F7"/>
     <path d="M15.3334 20H24.6667" stroke="black" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M20 24.6668L24.6667 20.0002L20 15.3335" stroke="black" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</symbol>
+
+<symbol id="icon-pagination-left" viewBox="0 0 40 40">
+    <rect width="40" height="40" rx="5" fill="#F7F7F7"/>
+    <path d="M24.6667 20H15.3333" stroke="black" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M20 24.6667L15.3333 20L20 15.3334" stroke="black" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
 </symbol>
