@@ -1,0 +1,58 @@
+.footer {
+  background-color: #f7f7f7;
+  height: 77px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.footer__text-copyright,
+.footer__text-students {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 1.1875;
+  /* identical to box height */
+  color: #545454;
+}
+
+.footer__logo {
+  width: 14px;
+  height: 12.88px;
+  fill: #ff6b08;
+}
+
+.footer__students-link {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 1.1875;
+  /* identical to box height */
+
+  color: #545454;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .footer {
+    height: 100px;
+  }
+
+  .footer__text-copyright,
+  .footer__text-students {
+    display: block;
+    font-size: 14px;
+    line-height: 1.1428;
+  }
+
+  .footer__students-link {
+    font-size: 14px;
+    line-height: 1.1428;
+  }
+
+  .footer__text-copyright {
+    margin-bottom: 9.9px;
+  }
+}
