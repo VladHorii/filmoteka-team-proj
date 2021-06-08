@@ -1,3 +1,3 @@
 import './sass/main.scss';
-
-import './js/movie-service';
+import './js/api-movie-service';
+import './js/hero-markup';

@@ -1,0 +1,15 @@
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  display: block;
+  max-width: 330px;
+  margin: 15px;
+}
+
+.card_img {
+  border-radius: 5px;
+}
