@@ -1,0 +1,42 @@
+.my-library-conteiner {
+  padding: 46px 20px 65px;
+}
+
+.button-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.my-library-button {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--secondary-text-color);
+
+  width: 130px;
+  height: 44px;
+
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 1);
+  border-radius: 5px;
+  outline: none;
+}
+
+.my-library-button.is-active {
+  border: none;
+  background-color: var(--accent-color);
+}
+
+@media screen and (min-width: 768px) {
+  .my-library-conteiner {
+    padding: 41px 75px 65px 71px;
+  }
+
+  .button-block {
+    gap: 15px;
+  }
+}
