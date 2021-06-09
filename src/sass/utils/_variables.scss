@@ -1,4 +1,10 @@
 :root {
+  --general-font-family: 'Roboto', sans-serif;
   --accent-color: #ff6b08;
-  --secondary-text-color: #fff;
+  --primary-text-color: #000000;
+  --secondary-text-color: #ffffff;
+  --tertiary-text-color: #545454;
+  --quaternary-text-color: #8c8c8c;
+  --transition-duration: 250ms;
+  --transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
