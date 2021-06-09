@@ -19,19 +19,18 @@
   }
 }
 
-
 .nav {
   width: 100%;
   height: 40px;
   padding-top: 20px;
   opacity: 1;
-  -webkit-transition: all .5s ease;
-  transition: all .5s ease;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
 .nav-up {
   -webkit-transform: translateY(-100px);
-          transform: translateY(-100px);
+  transform: translateY(-100px);
   opacity: 0;
 }
 
@@ -49,15 +48,15 @@ li {
   padding-bottom: 10px;
   color: #ffffff;
   text-decoration: none;
-  border-bottom: solid 2px #FF6B08;
-  -webkit-transition: all .25s ease;
-  transition: all .25s ease;
+  border-bottom: solid 2px #ff6b08;
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
   cursor: pointer;
 }
 
 .signin-inactive a {
   padding-bottom: 0;
-  color: rgba(255,255,255,.3);
+  color: rgba(255, 255, 255, 0.3);
   text-decoration: none;
   border-bottom: none;
   cursor: pointer;
@@ -67,16 +66,16 @@ li {
   cursor: pointer;
   color: #ffffff;
   text-decoration: none;
-  border-bottom: solid 2px #FF6B08;
+  border-bottom: solid 2px #ff6b08;
   padding-bottom: 10px;
 }
 
 .signup-inactive a {
   cursor: pointer;
-  color: rgba(255,255,255,.3);
+  color: rgba(255, 255, 255, 0.3);
   text-decoration: none;
-  -webkit-transition: all .25s ease;
-  transition: all .25s ease;
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
 }
 
 .modal {
@@ -86,11 +85,11 @@ li {
   position: relative;
   padding: 50px 20px;
   border-radius: 15px;
- background-image: url("../images/form-bg.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
- 
+  background-image: url('../images/form-bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+
   transform: perspective(600px) translate(0px, 0px) rotateX(0deg);
   transition: all 750ms cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -113,7 +112,7 @@ li {
   display: flex;
   align-items: center;
   justify-content: center;
-  background:rgba(255,255,255,.3);
+  background: rgba(255, 255, 255, 0.3);
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   cursor: pointer;
@@ -129,10 +128,6 @@ li {
   }
 }
 
-
-
- 
-
 .modal-form {
   display: flex;
   flex-direction: column;
@@ -143,21 +138,20 @@ li {
   position: relative;
   display: block;
   margin-top: 4px;
-  
 }
 
 .modal-form__input {
   width: 100%;
   height: 35px;
-	padding-left: 15px;
-	border: none;
-	border-radius: 20px;
+  padding-left: 15px;
+  border: none;
+  border-radius: 20px;
   margin-bottom: 20px;
-  background: rgba(255,255,255,.2);
+  background: rgba(255, 255, 255, 0.2);
 
   &:focus {
     outline: none;
-    border-color: #FF6B08;
+    border-color: #ff6b08;
   }
 }
 
@@ -177,48 +171,39 @@ li {
   margin-bottom: 20px;
 }
 
-
-
-
-
-
- .button {
+.button {
   display: block;
   margin: 0 auto;
   margin-top: 10px;
 }
 
- .button:hover {
-  background-color: #FF6B08;
+.button:hover {
+  background-color: #ff6b08;
 }
-
 
 .modal-form__signin {
   width: 430px;
   height: 375px;
-	font-size: 16px;
-	font-weight: 300;
+  font-size: 16px;
+  font-weight: 300;
   padding-left: 37px;
   padding-right: 37px;
   padding-top: 55px;
-  -webkit-transition: opacity .5s ease, -webkit-transform .5s ease;
-  transition: opacity .5s ease, -webkit-transform .5s ease;
-  transition: opacity .5s ease, transform .5s ease;
-  transition: opacity .5s ease, transform .5s ease, -webkit-transform .5s ease;
+  -webkit-transition: opacity 0.5s ease, -webkit-transform 0.5s ease;
+  transition: opacity 0.5s ease, -webkit-transform 0.5s ease;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: opacity 0.5s ease, transform 0.5s ease, -webkit-transform 0.5s ease;
 }
 
 .modal-form__signup {
   width: 430px;
   height: 375px;
-	font-size: 16px;
-	font-weight: 300;
+  font-size: 16px;
+  font-weight: 300;
   padding-left: 37px;
   padding-right: 37px;
   padding-top: 55px;
-  
-  -webkit-transition: all .5s ease;
-  transition: all .5s ease;
+
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
-
-
-
