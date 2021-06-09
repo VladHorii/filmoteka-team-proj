@@ -7,5 +7,7 @@ axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 export const fetchMovie = async () => {
   const newCard = await axios.get(`/trending/all/week?${API_KEY}`);
   const response = await newCard.data.results;
+  const page = await newCard.data.page;
+  const totalPages = await newCard.data.total_pages;
   return response;
 };
