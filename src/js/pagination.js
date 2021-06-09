@@ -1,15 +1,12 @@
-import { fetchMovie } from './api-movie-service';
+// import { fetchMovie } from './api-movie-service';
 const ulTag = document.querySelector('.pagination__list');
 const btnPrev = document.querySelector('.btn__prev');
 const btnNext = document.querySelector('.btn__next');
 
-console.log(
-  fetchMovie()
-    .then(r => r.page)
-);
+// console.log(fetchMovie().then(r => r.page));
 let totalPages = 9;
 
-ulTag.addEventListener('click', onPagination);
+// ulTag.addEventListener('click', onPagination);
 
 function onPagination(e) {
   if (!e.target.classList.contains('pagination__item')) {
@@ -33,14 +30,14 @@ if (window.matchMedia('(max-width: 367px)').matches) {
     let afterPages = page + 2;
 
     if (page < 1) {
-      liTag += `<li class="pagination__list number" onclick="element(totalPages, 1)">1</li>`;
+      liTag += `<li class="number" data-arrow="1">1</li>`;
     }
 
     if (page > 1) {
       //show the next button if the page value is greater than 1
-      liTag += `<li class="pagination__item btn__arrow btn__prev" onclick="element(totalPages, ${
+      liTag += `<li class="btn-arrow btn-prev" data-arrow="${
         page - 1
-      })"><svg class="pagination__item arrow__left__icon" width="16" height="16"><use href="./images/sprite.svg#icon-pagination-left"></use></svg></li>`;
+      }">P<svg class="arrow-left-icon" width="16" height="16"><use href="./sprite.svg#icon-pagination-left"></use></svg></li>`;
     }
 
     // how many li show before the current li
@@ -89,14 +86,14 @@ if (window.matchMedia('(max-width: 367px)').matches) {
         activeLi = '';
       }
 
-      liTag += `<li class="pagination__item number ${activeLi}" onclick="element(totalPages, ${pageLength})">${pageLength}</li>`;
+      liTag += `<li class="number ${activeLi}" data-arrow="${pageLength}">${pageLength}</li>`;
     }
 
-    //show the next button if the page value is less than totalPage()
+    //show the next button if the page value is less than totalPage(20)
     if (page < totalPages) {
-      liTag += `<li class="pagination__item btn__arrow btn__next"  onclick="element(totalPages, ${
+      liTag += `<li class="btn-arrow btn-next"  data-arrow="${
         page + 1
-      })"><svg class="arrow_right__icon" width="16" height="16"><use href="./images/sprite.svg#icon-pagination-right"></use></svg></li>`;
+      }">N<svg class="arrow-right-icon" width="16" height="16"><use href="./sprite.svg#icon-pagination-right"></use></svg></li>`;
     }
 
     ulTag.innerHTML = liTag;
@@ -110,19 +107,19 @@ if (window.matchMedia('(max-width: 367px)').matches) {
 
     //show the next button if the page value is greater than 1
     if (page > 1) {
-      liTag += `<li class="pagination__item btn__arrow btn__prev" onclick="element(totalPages, ${
+      liTag += `<li class="pagination__item btn-arrow btn-prev" data-arrow="${
         page - 1
-      })"><svg class="arrow__left__icon" width="16" height="16"><use href="./sprite.svg#icon-pagination-left"></use></svg></li>`;
+      }"><svg class="arrow-left-icon" width="16" height="16"><use href="./sprite.svg#icon-pagination-left"></use></svg></li>`;
     }
 
     //if page value is less than 2 then add 1 after the previous button
     if (page > 3 && totalPages > 7) {
-      liTag += `<li class="pagination__item number" onclick="element(totalPages, 1)">1</li>`;
+      liTag += `<li class="pagination__item number" data-arrow="1">1</li>`;
     }
 
     //if page value is greater than 4 then add this (...) after the first li or page
     if (page > 4 && totalPages > 8) {
-      liTag += `<li class="pagination__item dots">...</li>`;
+      liTag += `<li class="dots">...</li>`;
     }
 
     // how many li show before the current li
@@ -183,26 +180,27 @@ if (window.matchMedia('(max-width: 367px)').matches) {
         activeLi = '';
       }
 
-      liTag += `<li class="pagination__item number ${activeLi}" onclick="element(totalPages, ${pageLength})">${pageLength}</li>`;
+      liTag += `<li class="pagination__item number ${activeLi}" data-arrow="${pageLength}" >${pageLength}</li>`;
     }
 
     if (page < totalPages - 2 && totalPages > 7) {
       //if page value is less than totalPage value by -1 then show the last li or page
       if (page < totalPages - 3 && totalPages > 8) {
         //if page value is less than totalPage value by -2 then add this (...) before the last li or page
-        liTag += `<li class="pagination__item dots">...</li>`;
+        liTag += `<li class="dots">...</li>`;
       }
-      liTag += `<li class="pagination__item number" onclick="element(totalPages, ${totalPages})">${totalPages}</li>`;
+      liTag += `<li class="pagination__item number" data-arrow="${totalPages}">${totalPages}</li>`;
     }
 
     //show the next button if the page value is less than totalPage(20)
     if (page < totalPages) {
-      liTag += `<li class="pagination__item btn__arrow btn__next"  onclick="element(totalPages, ${
+      liTag += `<li class="pagination__item btn-arrow btn-next" data-arrow="${
         page + 1
-      })"><svg class="arrow__right__icon" width="16" height="16"><use href="./sprite.svg#icon-pagination-right"></use></svg></li>`;
+      }">N<svg class="arrow-right-icon" width="16" height="16"><use href="./images/sprite.svg#icon-pagination-right"></use></svg></li>`;
     }
 
     ulTag.innerHTML = liTag;
   }
 }
+
 element(totalPages, 1);

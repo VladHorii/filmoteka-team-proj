@@ -9,5 +9,5 @@ export const fetchMovie = async () => {
   const response = await newCard.data.results;
   const page = await newCard.data.page;
   const totalPages = await newCard.data.total_pages;
-  return { response, page, totalPages };
+  return response;
 };
