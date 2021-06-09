@@ -4,7 +4,7 @@ const btnPrev = document.querySelector('.btn__prev');
 const btnNext = document.querySelector('.btn__next');
 
 // console.log(fetchMovie().then(r => r.page));
-let totalPages = 9;
+let totalPages = 27;
 
 // ulTag.addEventListener('click', onPagination);
 
@@ -109,7 +109,7 @@ if (window.matchMedia('(max-width: 367px)').matches) {
     if (page > 1) {
       liTag += `<li class="pagination__item btn-arrow btn-prev" data-arrow="${
         page - 1
-      }"><svg class="arrow-left-icon" width="16" height="16"><use href="./sprite.svg#icon-pagination-left"></use></svg></li>`;
+      }">P<svg class="arrow-left-icon" width="16" height="16"><use href="./sprite.svg#icon-pagination-left"></use></svg></li>`;
     }
 
     //if page value is less than 2 then add 1 after the previous button
@@ -203,4 +203,4 @@ if (window.matchMedia('(max-width: 367px)').matches) {
   }
 }
 
-element(totalPages, 1);
+element(totalPages, 7);
