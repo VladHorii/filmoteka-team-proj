@@ -23,3 +23,4 @@ fetchMovie().then(data => {
   makeMarkup(data);
   // console.log(createDate(data));
 });
+// console.log(createDate(data));
