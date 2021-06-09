@@ -1,19 +1,20 @@
 {{#each this}}
-  <li class='card'>
-    <img
-      class='card_img'
-      src='https://image.tmdb.org/t/p/w500{{poster_path}}'
-      alt='{{title}}'
-      width='320'
-    />
-    <h2>
-      {{title}}
-    </h2>
-    <p>
-      {{genre_ids}}|
-    </p>
-    <div>
-      {{release_date}}
+  <li class='gallery__list-item'>
+    <a class='gallery__list-link' href=''>
+      <img class='card_img' src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt="{{title}}" />
+    </a>
+    <div class='gallery-title-block'>
+      <h2 class='gallery-title-block__title'>
+        {{title}}
+      </h2>
+      <div class='gallery-title-block__info'>
+        <p>
+          {{genre_ids}} |
+        </p>
+        <div>
+          &nbsp;{{release_date}}
+        </div>
+      </div>
     </div>
   </li>
 {{/each}}
