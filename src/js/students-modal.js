@@ -4,9 +4,6 @@ refs = {
   studentsModal: document.querySelector('[data-students-modal]'),
 };
 
-console.log(refs.openStudentsModal);
-console.log(refs.closeStudentsModal);
-
 refs.openStudentsModal.addEventListener('click', onClickStudentsModal);
 refs.closeStudentsModal.addEventListener('click', onClickStudentsModal);
 
@@ -17,8 +14,6 @@ function onClickStudentsModal() {
 refs.studentsModal.addEventListener('click', onBackdropClick);
 
 function onBackdropClick(event) {
-  console.log(event.currentTarget);
-  console.log(event.target);
   if (event.currentTarget === event.target) {
     refs.studentsModal.classList.add('visually-hidden');
   }
