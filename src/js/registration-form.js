@@ -23,6 +23,42 @@ document.querySelector('.modal-form__signin').addEventListener('submit', e => {
   });
 });
 
+document.querySelector('.modal-form__signup').addEventListener('submit', e => {
+  e.preventDefault();
+
+  const formData = new FormData(e.target);
+  const data = {
+    email: formData.get('user-email'),
+    pass: formData.get('user-password'),
+    passConfirm: formData.get('user-confirm-password'),
+    name: formData.get('user-name'),
+  };
+  document.querySelector('.modal-form__status').textContent = '';
+
+  if (data.pass !== data.passConfirm) {
+    return (document.querySelector('.modal-form__status').textContent = 'Пароли не совпадают');
+  }
+  if (data.pass.length < 5) {
+    return (document.querySelector('.modal-form__status').textContent =
+      'Парол должен содержать более 5-и символов');
+  }
+  if (data.name.length < 3) {
+    return (document.querySelector('.modal-form__status').textContent =
+      'Имя содержит менее 3-х символов');
+  }
+
+  auth.register(data.email, data.name, data.pass).then(response => {
+    if (response === data.email) {
+      toggleModal();
+      document.querySelector('.modal-form__status').textContent = '';
+    } else {
+      // Действие при неправильном пароле
+      document.querySelector('.modal-form__status').textContent =
+        'Произошла ошибка при создании аккаунта';
+    }
+  });
+});
+
 document.querySelector('.js-auth-submit-logout').addEventListener('click', auth.logout);
 
 const refs = {
