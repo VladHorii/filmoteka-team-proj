@@ -57,12 +57,8 @@ export default class Authorization {
     }
   }
 
-  async register() {
-    const email = document.querySelector('.auth-email').value;
-    const name = document.querySelector('.auth-name').value;
-    const pass = document.querySelector('.auth-pass').value;
+  async register(email, name, pass) {
     console.log('REGISTER', email, name, pass);
-
     try {
       await firebase.auth().createUserWithEmailAndPassword(email, pass);
 
@@ -73,16 +69,14 @@ export default class Authorization {
       });
       this.isAuth = true;
       this.setUser();
+      return await email;
     } catch (error) {
       console.log(error);
+      return error;
     }
   }
 
   async auth(email, pass) {
-    // const form = document.querySelector('.modal-form__signin');
-    // const email = form.querySelector('.js-auth-email').value;
-    // const pass = form.querySelector('.js-auth-pass').value;
-
     try {
       await firebase.auth().signInWithEmailAndPassword(email, pass);
 
