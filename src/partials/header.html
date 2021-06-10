@@ -1,4 +1,8 @@
 <!-- Head of the page with navigation and contacts -->
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+</head>
+
 <header>
   <div class="header-container container">
     <include src="./partials/theme-switch.html"></include>
@@ -6,7 +10,9 @@
     <div class="header-navigation">
       <div class="header-logo">
         <a class="header-logo-link" href="./index.html" lang="en">
-          <span class="header-logo-icon"></span>
+          <svg class="header-logo-icon animate__animated animate__fadeInUp">
+            <use href="./images/sprite.svg#icon-header-film"></use>
+          </svg>
           <span class="header-logo-name">Filmoteka</span>
         </a>
       </div>
