@@ -11,3 +11,18 @@ export const fetchMovie = async () => {
   const totalPages = await newCard.data.total_pages;
   return response;
 };
+
+const fetchGenre = async () => {
+  const response = await axios.get(`/genre/movie/list?${API_KEY}&language=en-US'`);
+  return response.data.genres;
+};
+
+console.log(fetchGenre());
+// export const fetchGenre = asyns() => {
+//   const genreFetch = await axios.get(`/genre/movie/list?${API_KEY}&language=en-US`);
+//   const response = await genreFetch.data;
+//    console.log(response)
+
+//   return response;
+
+// }

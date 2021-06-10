@@ -8,6 +8,8 @@ function makeMarkup(movie) {
   cardMarkup.insertAdjacentHTML('beforeend', cardMarkupTpl(movie));
 }
 
+// function fetchGender
+
 // function cutDate(data) {
 //   return data.release_date ? data.release_date.split('-')[0] : '';
 // }
