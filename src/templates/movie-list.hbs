@@ -1,4 +1,21 @@
-{{#each this}}
+<li class='card'>
+  <img
+    class='card_img'
+    src='https://image.tmdb.org/t/p/w500{{this.posterPath}}'
+    alt='{{this.title}}'
+    width='320'
+  />
+  <h2>
+    {{this.title}}
+  </h2>
+  <p>
+    {{genre_ids}}|
+  </p>
+  <div>
+    {{this.relDate}}
+  </div>
+</li>
+{{!-- {{#each this}}
   <li class='card'>
     <img
       class='card_img'
@@ -7,7 +24,7 @@
       width='320'
     />
     <h2>
-      {{title}}{{name}}
+      {{title}}
     </h2>
     <p>
       {{genre_ids}}|
@@ -16,4 +33,4 @@
       {{release_date}}{{first_air_date}}
     </div>
   </li>
-{{/each}}
+{{/each}} --}}

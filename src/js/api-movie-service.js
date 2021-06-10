@@ -11,3 +11,9 @@ export const fetchMovie = async () => {
   const totalPages = await newCard.data.total_pages;
   return response;
 };
+
+export const getGenre = async () => {
+  const response = await axios.get(`/genre/movie/list?${API_KEY}&language=en-US`);
+  const genres = response.data.genres;
+  console.log(genres);
+};
