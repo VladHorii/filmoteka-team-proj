@@ -26,6 +26,7 @@
         url(../images/header-library/bg-img-tablet@2x.jpg);
     }
   }
+  @media screen and (min-width: $desktop) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url(../images/header-library/bg-img-desktop.jpg);
   }
