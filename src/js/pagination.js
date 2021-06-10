@@ -20,7 +20,7 @@ function paginationMobile(totalPages, page) {
     //show the next button if the page value is greater than 1
     liTag += `<li class="btn-arrow btn-prev" onclick="paginationMobile(totalPages, ${
       page - 1
-    })">P<svg class="arrow-left-icon" width="16" height="16"><use href="./images/arrow-left.svg"></use></svg></li>`;
+    })">&#10094;<svg class="pagination__arrow-left" width="0" height="0"><use href="./images/sprite.svg#pagination-arrow-right"></use></svg></li>`;
   }
 
   // how many li show before the current li
@@ -76,7 +76,7 @@ function paginationMobile(totalPages, page) {
   if (page < totalPages) {
     liTag += `<li class="btn-arrow btn-next"  onclick="paginationMobile(totalPages, ${
       page + 1
-    })">N<svg class="arrow-right-icon" width="16" height="16"><use href="./images/arrow-left.svg"></use></svg></li>`;
+    })">&#10095;<svg class="arrow-right-icon" width="0" height="0"><use href="./images/arrow-left.svg"></use></svg></li>`;
   }
 
   ulTag.innerHTML = liTag;
@@ -90,9 +90,8 @@ function paginationTabDesk(totalPages, page) {
 
   //show the next button if the page value is greater than 1
   if (page > 1) {
-    liTag += `<li class="btn-arrow btn-prev" onclick="paginationTabDesk(totalPages, ${
-      page - 1
-    })">P<svg class="arrow-left-icon" width="16" height="16"><use href="./images/arrow-right.svg"></use></svg></li>`;
+    liTag += `<li class="btn-arrow btn-prev" onclick="paginationTabDesk(totalPages, ${page - 1})">	
+    	&#10094;<svg class="arrow-right-icon" width="0" height="0"><use href="./images/arrow-right.svg"></use></svg></li>`;
   }
 
   //if page value is less than 2 then add 1 after the previous button
@@ -177,9 +176,8 @@ function paginationTabDesk(totalPages, page) {
 
   //show the next button if the page value is less than totalPage(20)
   if (page < totalPages) {
-    liTag += `<li class="btn-arrow btn-next"  onclick="paginationTabDesk(totalPages, ${
-      page + 1
-    })">N<svg class="arrow-right-icon" width="16" height="16"><use href="./images/arrow-left.svg"></use></svg></li>`;
+    liTag += `<li class="btn-arrow btn-next"  onclick="paginationTabDesk(totalPages, ${page + 1})">	
+    &#10095;<svg class="arrow-right-icon" width="0" height="0"><use href="./images/arrow-right.svg"></use></svg></li>`;
   }
 
   ulTag.innerHTML = liTag;
