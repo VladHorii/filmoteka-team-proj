@@ -40,7 +40,7 @@ export default class Authorization {
 
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 
-    document.querySelector('.auth-status').textContent = `Вы не авторизованы`;
+    // document.querySelector('.auth-status').textContent = `Вы не авторизованы`;
 
     firebase.auth().onAuthStateChanged(this.setUser.bind(this));
   }
@@ -51,8 +51,9 @@ export default class Authorization {
         name: await this.getUserName(),
         uid: this.getUserID(),
       };
-      document.querySelector('.auth-status').textContent = `Вы авторизованы как ${this.user.name}`;
+      // document.querySelector('.auth-status').textContent = `Вы авторизованы как ${this.user.name}`;
       document.querySelector('.js-auth-btn').textContent = `my library`;
+      document.querySelector('.js-logout-btn').classList.remove('visually-hidden');
       this.isAuth = true;
     }
   }
@@ -95,6 +96,7 @@ export default class Authorization {
     this.user = {};
     this.isAuth = false;
     document.querySelector('.js-auth-btn').textContent = `Sign IN`;
+    document.querySelector('.js-logout-btn').classList.add('visually-hidden');
   }
 }
 

@@ -59,7 +59,7 @@ document.querySelector('.modal-form__signup').addEventListener('submit', e => {
   });
 });
 
-document.querySelector('.js-auth-submit-logout').addEventListener('click', auth.logout);
+document.querySelector('.js-logout-btn').addEventListener('click', auth.logout);
 
 const refs = {
   openModalBtn: document.querySelector('[data-modal-open]'),
@@ -70,6 +70,8 @@ const refs = {
 
   form_signin: document.querySelector('.modal-form__signin'),
   form_signup: document.querySelector('.modal-form__signup'),
+
+  logout: document.querySelector('.js-logout-btn'),
 };
 
 function toggleModal() {
