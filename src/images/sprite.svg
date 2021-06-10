@@ -10,28 +10,19 @@
 
 <svg id="icon-header-search" width="12" height="12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 9.5a4 4 0 100-8 4 4 0 000 8zM10.5 10.5L8.325 8.325" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"/></svg>
 
-<symbol id="icon-header-film" viewBox="0 0 30 31">
-    <g filter="url(#filter0_d)">
-    <path d="M22.82 2H7.18C5.97602 2 5 2.97602 5 4.18V19.82C5 21.024 5.97602 22 7.18 22H22.82C24.024 22 25 21.024 25 19.82V4.18C25 2.97602 24.024 2 22.82 2Z" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M10 2V22" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M20 2V22" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M5 12H25" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M5 7H10" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M5 17H10" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M20 17H25" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M20 7H25" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </g>
-    <defs>
-    <filter id="filter0_d" x="-1" y="0" width="32" height="32" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
-    <feOffset dy="4"/>
-    <feGaussianBlur stdDeviation="2"/>
-    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
-    </filter>
-    </defs>
+<symbol id="icon-header-film" width="24" height="24" viewBox="0 0 24 24">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="film">
+<path id="Vector" d="M19.82 2H4.18C2.97602 2 2 2.97602 2 4.18V19.82C2 21.024 2.97602 22 4.18 22H19.82C21.024 22 22 21.024 22 19.82V4.18C22 2.97602 21.024 2 19.82 2Z" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M7 2V22" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_3" d="M17 2V22" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_4" d="M2 12H22" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_5" d="M2 7H7" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_6" d="M2 17H7" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_7" d="M17 17H22" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_8" d="M17 7H22" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>
 </symbol>
 
 <symbol id="icon-modal-close" viewBox="0 0 30 30">
@@ -75,3 +66,6 @@
     <path d="M24.6667 20H15.3333" stroke="black" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M20 24.6667L15.3333 20L20 15.3334" stroke="black" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
 </symbol>
+
+
+
