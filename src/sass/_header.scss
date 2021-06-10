@@ -13,6 +13,7 @@
 
   &-logo {
     display: block;
+    align-content: center;
 
     height: 24px;
   }
@@ -22,11 +23,10 @@
   }
   &-logo-icon {
     display: block;
+    align-items: center;
 
-    height: 24px;
-    width: 24px;
-
-    background-color: blue;
+    height: 35px;
+    width: 35px;
   }
 
   &-logo-name {
