@@ -8,3 +8,4 @@ import './js/pagination';
 import './js/spinner';
 import './js/theme-switch';
 import './js/scrollTopBtn';
+import './js/aos';
