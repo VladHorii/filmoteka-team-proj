@@ -9,12 +9,11 @@
 // base
 @import './base/container';
 @import './base/common';
-@import './components/button';
+@import './registration-form';
 @import './utils/variables';
 @import './header';
 @import './footer';
 @import './students';
-@import './components/pagination';
 //layout
 @import './layout/index/hero';
 
@@ -22,3 +21,5 @@
 @import './theme-switch';
 // components
 @import './components/scrollTopBtn';
+@import './components/button';
+@import './components/pagination';
