@@ -2,45 +2,71 @@
   <div class="modal-wrap">
     <div class="modal">
       <div class="nav">
-        <ul class="links">
-          <li class="signin-active"><a class="btn-signin">Sign in</a></li>
-          <li class="signup-inactive"><a class="btn-signup">Sign up </a></li>
+        <ul class="form-switcher">
+          <li class="form-switcher__item">
+            <a class="form-switcher__link form-switcher__link--active btn-signin">Sign in</a>
+          </li>
+          <li class="form-switcher__item">
+            <a class="form-switcher__link btn-signup">Sign up </a>
+          </li>
         </ul>
       </div>
+
       <form class="modal-form__signin">
         <label class="modal-form__label"
-          >Username
+          >Email
           <span class="input-wrapper">
-            <input type="text" class="modal-form__input" name="user-name" required />
+            <input
+              type="email"
+              class="modal-form__input js-auth-email"
+              name="user-email"
+              required
+            />
           </span>
         </label>
         <label class="modal-form__label"
           >Password
           <span class="input-wrapper">
-            <input type="password" class="modal-form__input" name="user-password" required />
+            <input
+              type="password"
+              class="modal-form__input js-auth-passwd"
+              name="user-password"
+              required
+            />
           </span>
           <button type="submit" class="button">Sign in</button>
         </label>
+        <p class="modal-form__status"></p>
       </form>
 
       <form class="modal-form__signup visually-hidden">
         <label class="modal-form__label"
           >Name
           <span class="input-wrapper">
-            <input type="text" class="modal-form__input" name="user-name" required />
+            <input type="text" class="modal-form__input js-auth-name" name="user-name" required />
           </span>
         </label>
         <label class="modal-form__label"
           >E-mail
           <span class="input-wrapper">
-            <input type="email" class="modal-form__input" name="user-email" required />
+            <input
+              type="email"
+              class="modal-form__input js-auth-email"
+              name="user-email"
+              required
+            />
           </span>
         </label>
 
         <label class="modal-form__label"
           >Password
           <span class="input-wrapper">
-            <input type="password" class="modal-form__input" name="user-password" required />
+            <input
+              type="password"
+              class="modal-form__input js-auth-passwd"
+              name="user-password"
+              required
+            />
           </span>
         </label>
         <label class="modal-form__label"
@@ -48,7 +74,7 @@
           <span class="input-wrapper">
             <input
               type="password"
-              class="modal-form__input"
+              class="modal-form__input js-auth-confirm-passwd"
               name="user-confirm-password"
               required
             />
