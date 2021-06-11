@@ -1,0 +1,19 @@
+@mixin hover() {
+  @media screen and (min-width: $desktop) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin button-reset {
+  padding: 0;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  outline: transparent;
+  white-space: normal;
+  display: inline-block;
+}

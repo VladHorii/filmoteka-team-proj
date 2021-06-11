@@ -26,8 +26,10 @@
     "sass": "^1.32.8"
   },
   "dependencies": {
+    "aos": "^2.3.4",
     "axios": "^0.21.1",
     "firebase": "^8.6.5",
-    "shortid": "^2.2.16"
+    "shortid": "^2.2.16",
+    "smoothscroll-polyfill": "^0.4.4"
   }
 }

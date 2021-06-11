@@ -2,9 +2,9 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 
-import shortid from 'shortid';
+// import shortid from 'shortid';
 
-class Authorization {
+export default class Authorization {
   constructor() {
     this.user = {};
     this.isAuth = false;
@@ -40,7 +40,7 @@ class Authorization {
 
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 
-    document.querySelector('.auth-status').textContent = `Вы не авторизованы`;
+    // document.querySelector('.auth-status').textContent = `Вы не авторизованы`;
 
     firebase.auth().onAuthStateChanged(this.setUser.bind(this));
   }
@@ -51,18 +51,16 @@ class Authorization {
         name: await this.getUserName(),
         uid: this.getUserID(),
       };
-      document.querySelector('.auth-status').textContent = `Вы авторизованы как ${this.user.name}`;
-
+      // document.querySelector('.auth-status').textContent = `Вы авторизованы как ${this.user.name}`;
+      document.querySelector('.js-auth-btn').parentNode.classList.add('visually-hidden');
+      document.querySelector('.js-logout-btn').parentNode.classList.remove('visually-hidden');
+      document.querySelector('.js-my-library-btn').parentNode.classList.remove('visually-hidden');
       this.isAuth = true;
     }
   }
 
-  async register() {
-    const email = document.querySelector('.auth-email').value;
-    const name = document.querySelector('.auth-name').value;
-    const pass = document.querySelector('.auth-pass').value;
+  async register(email, name, pass) {
     console.log('REGISTER', email, name, pass);
-
     try {
       await firebase.auth().createUserWithEmailAndPassword(email, pass);
 
@@ -73,23 +71,24 @@ class Authorization {
       });
       this.isAuth = true;
       this.setUser();
+      return await email;
     } catch (error) {
       console.log(error);
+      return error;
     }
   }
 
-  async auth() {
-    const email = document.querySelector('.auth-email').value;
-    const pass = document.querySelector('.auth-pass').value;
-
+  async auth(email, pass) {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, pass);
 
       await this.setUser();
 
-      console.log(`Вы авторизовались как ${authorization.user.name}`);
+      // console.log(`Вы авторизовались как ${this.user.name}`);
+      return await email;
     } catch (error) {
       console.log(error);
+      return error;
     }
   }
 
@@ -97,25 +96,27 @@ class Authorization {
     firebase.auth().signOut();
     this.user = {};
     this.isAuth = false;
+    document.querySelector('.js-auth-btn').parentNode.classList.remove('visually-hidden');
+    document.querySelector('.js-logout-btn').parentNode.classList.add('visually-hidden');
+    document.querySelector('.js-my-library-btn').parentNode.classList.add('visually-hidden');
   }
 }
 
-const authorization = new Authorization();
+// document
+//   .querySelector('.modal-form__signup .button')
+//   .addEventListener('click', authorization.register.bind(authorization));
+// document
+//   .querySelector('.js-auth-submit-logout')
+//   .addEventListener('click', authorization.logout.bind(authorization));
 
-document
-  .querySelector('.js-auth-submit-register')
-  .addEventListener('click', authorization.register.bind(authorization));
-document
-  .querySelector('.js-auth-submit-logout')
-  .addEventListener('click', authorization.logout.bind(authorization));
+// document.querySelector('.modal-form__signin .button').addEventListener('click', e => {
+//   e.preventDefault();
+//   authorization.auth.bind(authorization);
+// });
 
-document
-  .querySelector('.js-auth-submit-auth')
-  .addEventListener('click', authorization.auth.bind(authorization));
-
-document.querySelector('.js-auth-submit-myname').addEventListener('click', async e => {
-  console.log(authorization.user);
-});
+// document.querySelector('.js-auth-submit-myname').addEventListener('click', async e => {
+//   console.log(authorization.user);
+// });
 //
 //
 //
@@ -124,39 +125,39 @@ document.querySelector('.js-auth-submit-myname').addEventListener('click', async
 // Добавление и просмотр списка просмотренных фильмов
 //
 
-document.querySelector('.js-lib-add-watched').addEventListener('click', e => {
-  const uid = authorization.user.uid;
-  const sid = shortid.generate();
-  firebase.database().ref(`/users/${uid}/info/watched`).push(sid);
+// document.querySelector('.js-lib-add-watched').addEventListener('click', e => {
+//   const uid = authorization.user.uid;
+//   const sid = shortid.generate();
+//   firebase.database().ref(`/users/${uid}/info/watched`).push(sid);
 
-  console.log('click to add-watched');
-});
-document.querySelector('.js-lib-add-queue').addEventListener('click', e => {
-  const uid = authorization.user.uid;
-  const sid = shortid.generate();
-  firebase.database().ref(`/users/${uid}/info/queue`).push(sid);
+//   console.log('click to add-watched');
+// });
+// document.querySelector('.js-lib-add-queue').addEventListener('click', e => {
+//   const uid = authorization.user.uid;
+//   const sid = shortid.generate();
+//   firebase.database().ref(`/users/${uid}/info/queue`).push(sid);
 
-  console.log('click to add-queue');
-});
-document.querySelector('.js-lib-queue').addEventListener('click', async e => {
-  const uid = authorization.user.uid;
-  const queue = (await firebase.database().ref(`/users/${uid}/info/queue`).once('value')).val();
+//   console.log('click to add-queue');
+// });
+// document.querySelector('.js-lib-queue').addEventListener('click', async e => {
+//   const uid = authorization.user.uid;
+//   const queue = (await firebase.database().ref(`/users/${uid}/info/queue`).once('value')).val();
 
-  for (let key in queue) {
-    console.log(queue[key]);
-  }
-  console.log('click to queue');
-});
-document.querySelector('.js-lib-watched').addEventListener('click', async e => {
-  const uid = authorization.user.uid;
-  const watched = (await firebase.database().ref(`/users/${uid}/info/watched`).once('value')).val();
+//   for (let key in queue) {
+//     console.log(queue[key]);
+//   }
+//   console.log('click to queue');
+// });
+// document.querySelector('.js-lib-watched').addEventListener('click', async e => {
+//   const uid = authorization.user.uid;
+//   const watched = (await firebase.database().ref(`/users/${uid}/info/watched`).once('value')).val();
 
-  for (let key in watched) {
-    console.log(watched[key]);
-  }
+//   for (let key in watched) {
+//     console.log(watched[key]);
+//   }
 
-  console.log('click to watched');
-});
+//   console.log('click to watched');
+// });
 {
   /* <p class="auth-status">1</p>
 <label>email<input class="auth-email" id="auth-email" type="text" /></label>
