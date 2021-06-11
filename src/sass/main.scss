@@ -11,7 +11,9 @@
 @import './base/common';
 @import './registration-form';
 @import './utils/variables';
-@import './header';
+@import './utils/mixin';
+@import './layout/index/header-home';
+@import './layout/index/header-library';
 @import './footer';
 @import './students';
 //layout
@@ -24,3 +26,5 @@
 @import './components/button';
 @import './components/pagination';
 @import './components/modal-movie-card';
+//utils
+@import './utils/variables';

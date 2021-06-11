@@ -52,8 +52,9 @@ export default class Authorization {
         uid: this.getUserID(),
       };
       // document.querySelector('.auth-status').textContent = `Вы авторизованы как ${this.user.name}`;
-      document.querySelector('.js-auth-btn').textContent = `my library`;
-      document.querySelector('.js-logout-btn').classList.remove('visually-hidden');
+      document.querySelector('.js-auth-btn').parentNode.classList.add('visually-hidden');
+      document.querySelector('.js-logout-btn').parentNode.classList.remove('visually-hidden');
+      document.querySelector('.js-my-library-btn').parentNode.classList.remove('visually-hidden');
       this.isAuth = true;
     }
   }
@@ -95,8 +96,9 @@ export default class Authorization {
     firebase.auth().signOut();
     this.user = {};
     this.isAuth = false;
-    document.querySelector('.js-auth-btn').textContent = `Sign IN`;
-    document.querySelector('.js-logout-btn').classList.add('visually-hidden');
+    document.querySelector('.js-auth-btn').parentNode.classList.remove('visually-hidden');
+    document.querySelector('.js-logout-btn').parentNode.classList.add('visually-hidden');
+    document.querySelector('.js-my-library-btn').parentNode.classList.add('visually-hidden');
   }
 }
 
