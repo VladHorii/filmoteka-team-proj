@@ -109,8 +109,8 @@
     align-items: center;
     justify-content: space-between;
   }
-  &-navigation-item {
-    margin-right: 40px;
+  &-navigation-item + &-navigation-item {
+    margin-left: 40px;
   }
 
   &-navigation-page {

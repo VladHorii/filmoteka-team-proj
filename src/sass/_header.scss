@@ -1,0 +1,224 @@
+.header-navigation-item + .header-navigation-item {
+  margin-left: 40px;
+}
+.header {
+  &-container {
+    padding-top: 46px;
+    padding-bottom: 43px;
+    max-width: 320px;
+
+    background-image: linear-gradient(rgba(47, 48, 58, 0.4), rgba(47, 48, 58, 0.4)),
+      url('../images/header/jpeg/header-mobile.jpg');
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: 320px 230px;
+  }
+
+  &-logo {
+    display: block;
+    align-content: center;
+
+    height: 24px;
+  }
+  &-logo-link {
+    display: flex;
+    align-items: center;
+  }
+  &-logo-icon {
+    display: block;
+    align-items: center;
+
+    height: 24px;
+    width: 24px;
+  }
+
+  &-logo-name {
+    display: none;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 35px;
+    color: var(--secondary-text-color);
+  }
+
+  &-navigation {
+    display: flex;
+    margin-bottom: 43px;
+
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  &-navigation-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    // width: 143px;
+  }
+
+  &-navigation-page {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--secondary-text-color);
+  }
+
+  &-search-field {
+    display: block;
+    margin: 0 auto 0 auto;
+    padding-right: 15px;
+    padding-left: 2px;
+
+    width: 280px;
+    height: 20px;
+
+    background-color: transparent;
+    color: var(--accent-color);
+    border: none;
+    border-bottom: 0.5px solid var(--secondary-text-color);
+
+    &::placeholder {
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 16px;
+      color: var(--secondary-text-color);
+    }
+  }
+
+  &-notification {
+    display: block;
+    height: 32px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+
+    color: #ff001b;
+  }
+
+  &-search-form {
+    position: relative;
+
+    display: block;
+    margin: 0 auto 22px auto;
+
+    width: 280px;
+    height: 20px;
+  }
+
+  &-search-icon {
+    position: absolute;
+    right: 0;
+    top: 2px;
+
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.is-current {
+  &::after {
+    content: '';
+    display: block;
+    // position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+
+    background-color: var(--accent-color);
+  }
+}
+
+@media screen and (min-device-pixel-ratio: 2) and (min-width: 320px),
+  screen and (min-resolution: 192dpi) and (min-width: 320px),
+  screen and (min-resolution: 2dppx) and (min-width: 320px) {
+  .header {
+    &-container {
+      background-image: linear-gradient(rgba(47, 48, 58, 0.4), rgba(47, 48, 58, 0.4)),
+        url('../images/header/jpeg/header-mobile@2x.jpg');
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .header {
+    &-container {
+      min-width: 768px;
+      padding-bottom: 59px;
+
+      background-image: linear-gradient(rgba(47, 48, 58, 0.4), rgba(47, 48, 58, 0.4)),
+        url('../images/header/jpeg/header-tablet.jpg');
+
+      background-size: 768px 230px;
+    }
+
+    &-logo-icon {
+      margin-right: 10px;
+    }
+
+    &-logo-name {
+      display: block;
+    }
+
+    &-search-form {
+      margin: 0 auto 22px auto;
+      width: 336px;
+    }
+
+    &-search-field {
+      width: 336px;
+    }
+
+    &-notification {
+      height: 16px;
+      text-align: center;
+    }
+  }
+}
+
+@media screen and (min-device-pixel-ratio: 2) and (min-width: 768px),
+  screen and (min-resolution: 192dpi) and (min-width: 768px),
+  screen and (min-resolution: 2dppx) and (min-width: 768px) {
+  .header {
+    &-container {
+      background-image: linear-gradient(rgba(47, 48, 58, 0.4), rgba(47, 48, 58, 0.4)),
+        url('../images/header/jpeg/header-tablet@2x.jpg');
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .header {
+    &-container {
+      max-width: 1024px;
+
+      background-image: linear-gradient(rgba(47, 48, 58, 0.4), rgba(47, 48, 58, 0.4)),
+        url('../images/header/jpeg/header-desktop.jpg');
+
+      background-size: 1024px 230px;
+    }
+  }
+}
+
+@media screen and (min-device-pixel-ratio: 2) and (min-width: 1024px),
+  screen and (min-resolution: 192dpi) and (min-width: 1024px),
+  screen and (min-resolution: 2dppx) and (min-width: 1024px) {
+  .header {
+    &-container {
+      background-image: linear-gradient(rgba(47, 48, 58, 0.4), rgba(47, 48, 58, 0.4)),
+        url('../images/header/jpeg/header-desktop@2x.jpg');
+    }
+  }
+}

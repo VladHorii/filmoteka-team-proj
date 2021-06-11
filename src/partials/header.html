@@ -11,7 +11,7 @@
   <div class="header-container container">
     <include src="./partials/theme-switch.html"></include>
 
-    <nav class="header-navigation">
+    <!-- <nav class="header-navigation">
       <a class="header-logo-link" href="#home" lang="en" data-link>
         <svg class="header-logo-icon animate__animated animate__fadeInUp">
           <use href="./images/sprite.svg#icon-header-film"></use>
@@ -28,6 +28,37 @@
         </li>
       </ul>
     </nav>
+======= -->
+    <nav class="header-navigation">
+      <div class="header-logo">
+        <a class="header-logo-link" href="#home" lang="en" data-link>
+          <svg class="header-logo-icon animate__animated animate__fadeInUp">
+            <use href="./images/sprite.svg#icon-header-film"></use>
+          </svg>
+          <span class="header-logo-name">Filmoteka</span>
+        </a>
+      </div>
+
+      <!-- <div class="header-menu"> -->
+      <ul class="header-navigation-list" id="page-nav">
+        <li class="header-navigation-item">
+          <a class="header-navigation-page is-current" href="#home" data-link>home</a>
+        </li>
+        <li class="header-navigation-item visually-hidden">
+          <a class="header-navigation-page js-my-library-btn" href="#library" data-link>
+            my library
+          </a>
+        </li>
+        <li class="header-navigation-item">
+          <a class="header-navigation-page js-auth-btn" href="#" data-modal-open>Sign IN</a>
+        </li>
+        <li class="header-navigation-item visually-hidden">
+          <a class="header-navigation-page js-logout-btn" href="#">Logout</a>
+        </li>
+      </ul>
+      <!-- </div> -->
+    </nav>
+
     <form class="header-search-form" id="search-form">
       <input
         class="header-search-field"
