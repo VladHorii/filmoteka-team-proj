@@ -11,3 +11,5 @@ import './js/spinner';
 import './js/theme-switch';
 import './js/scrollTopBtn';
 import './js/aos';
+import './js/modal-movie-card';
+import './js/api';
