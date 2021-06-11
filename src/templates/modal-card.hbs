@@ -1,0 +1,40 @@
+{{item}}
+<div class="modal-movie__card" data-id={{id}}>
+
+  <div class="modal-movie__img-wrap">
+    <img  class="modal-movie__img" src='https://image.tmdb.org/t/p/original/{{poster_path}}' alt='{{title}}' />
+  </div>
+
+  <div class="modal-movie__info-wrap">
+    <div class="modal-movie__title">{{original_title}}</div>
+
+      <ul class="modal-movie__info-items">
+        <li class="modal-movie__info-item">
+          <p class="modal-movie__info-title">vote / votes</p>
+          <p class="modal-movie__info-subtitle">
+            <span class="vote vote_average">{{vote_average}}</span> / 
+            <span class="vote vote_count">{{vote_count}}</span>
+          </p>
+        </li>
+        <li class="modal-movie__info-item">
+          <p class="modal-movie__info-title">popularity</p>
+          <p class="modal-movie__info-subtitle">{{popularity}}</p>
+        </li>
+        <li class="modal-movie__info-item">
+          <p class="modal-movie__info-title">original title</p>
+          <p class="modal-movie__info-subtitle">{{title}}</p></li>
+        <li class="modal-movie__info-item">
+          <p class="modal-movie__info-title">genre</p>
+          <p class="modal-movie__info-subtitle">
+            {{#each genres}}
+            <span>{{name}}{{#unless @last}},{{/unless}}</span>
+            {{/each}}</p>
+        </li>
+      </ul>
+
+      <h2 class="modal-movie__info-about">about</h2>
+      <p class="modal-movie__info-overview">{{overview}}</p>
+  </div>
+</div>
+
+<button type="button" class="modal-movie__button-close" data-action="close-modal-movie"></button>
