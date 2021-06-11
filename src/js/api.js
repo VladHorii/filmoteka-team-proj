@@ -11,7 +11,7 @@ export default class ApiService {
   async fetchItems() {
     axios.defaults.baseURL = 'https://api.themoviedb.org/3/trending/';
     const response = await axios.get(`movie/day?api_key=${this.key}&page=${this.page}`);
-    return response.data.results;
+    return response.data;
   }
 
   async fetchGenre() {
