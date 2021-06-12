@@ -1,43 +1,13 @@
-// import './sass/main.scss';
-import ApiService from './api';
-// import moviesListTpl from './templates/card.hbs';
+import { MovieService } from './api-movie-service';
 import modalCardTpl from '../templates/modal-card.hbs';
-const listItems = document.querySelector('.card');
 
-const apiItems = new ApiService();
-
-// apiService();
-
-// async function apiService() {
-//   const api = await apiItems.fetchItems();
-//   const apiGenre = await apiItems.fetchGenre();
-//   markupItems(api);
-//   getGenre(apiGenre);
-// }
-
-// function markupItems(items) {
-//   // console.log(moviesListTpl({ items }));
-
-//   listItems.insertAdjacentHTML('beforeend', moviesListTpl({ items }));
-// }
-
-// function getGenre(genre) {
-//   genre.forEach(e => {
-//     const abc = document.querySelectorAll('.genre-item');
-//     abc.forEach(a => {
-//       if (Number(a.textContent) === e.id) {
-//         a.textContent = e.name;
-//       }
-//     });
-//   });
-// }
-
+const apiItems = new MovieService();
 // =========   modal   ==========
 
-const cards = document.querySelector('.card');
-const modal = document.querySelector('.js-modal');
-const backdrop = document.querySelector('.js-backdrop');
-// const modalCloseBtn = document.querySelector('.modal__button-close');
+const cards = document.querySelector('.gallery__list');
+const modal = document.querySelector('.js-modal-movie');
+const backdrop = document.querySelector('.js-backdrop-movie');
+// const modalCloseBtn = document.querySelector('icon-modal-close');
 
 cards.addEventListener('click', onModalOpen);
 backdrop.addEventListener('click', onModalClose);
@@ -55,36 +25,32 @@ async function fetchMovieInfo() {
 
 function onModalOpen(e) {
   e.preventDefault();
+  const isFilmCardLiEl = e.target.parentNode.classList.contains('gallery__list-link');
 
-  const isFilmCardLiEl = e.target.parentNode.classList.contains('card__item');
   if (!isFilmCardLiEl) {
     return;
   }
 
   apiItems.id = e.target.parentNode.dataset.id;
-  addLightboxClass(e);
+  toggleBackdropClass(e);
   fetchMovieInfo();
   window.addEventListener('keydown', onModalClose);
 }
 
-function addLightboxClass() {
-  backdrop.classList.add('is-open');
+function toggleBackdropClass() {
+  backdrop.classList.toggle('is-open');
 }
 
 function onModalClose(e) {
-  const isCloseBtn = e.target.classList.contains('modal__button-close');
-  const isCloseOverlay = e.target.classList.contains('backdrop');
+  const isCloseBtn = e.target.classList.contains('modal-movie__button-close');
+  const isCloseOverlay = e.target.classList.contains('backdrop-movie');
   const isCloseEscBtn = e.code === 'Escape';
 
   if (isCloseOverlay || isCloseEscBtn || isCloseBtn) {
-    removeLightboxClass(e);
+    toggleBackdropClass(e);
     clearMovieCard();
     window.removeEventListener('keydown', onModalClose);
   }
-}
-
-function removeLightboxClass() {
-  backdrop.classList.remove('is-open');
 }
 
 function clearMovieCard() {
