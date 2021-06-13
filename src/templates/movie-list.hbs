@@ -1,19 +1,37 @@
-{{#each this}}
+{{#each movies}}
   <li class='gallery__list-item' data-aos='zoom-in'>
     <a class='gallery__list-link' href=''>
       <img class='card_img' src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt="{{title}}" />
     </a>
     <div class='gallery-title-block'>
       <h2 class='gallery-title-block__title'>
-        {{title}}
+        {{title}}{{name}}
       </h2>
       <div class='gallery-title-block__info'>
-        <p>
-          {{genre_ids}}
-          |
-        </p>
+        <ul class='gallery-title-block__list'>
+          {{#each genre_ids}}
+            <li class='gallery-title-block__item'>
+              {{this}}
+            </li>
+            <li class='gallery-title-block__coma'>
+              {{#unless @last}}
+                ,
+              {{/unless}}
+            </li>
+          {{/each}}
+        </ul>
+
+        {{!-- {{#each genres}}
+            <span>
+              {{name}}{{#unless @last}}
+                ,
+              {{/unless}}
+            </span>
+          {{/each}} --}}
+        |
+
         <div>
-          &nbsp;{{release_date}}
+          &nbsp;{{release_date}}{{first_air_date}}
         </div>
       </div>
     </div>

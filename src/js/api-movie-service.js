@@ -1,35 +1,34 @@
 import axios from 'axios';
 
-const API_KEY = 'api_key=0558fb418099b1d6ef291e53504aa0aa';
+// const API_KEY = 'api_key=0558fb418099b1d6ef291e53504aa0aa';
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 
 export class MovieService {
   constructor() {
     this.searchQuery = '';
-    // this.page = page;
+    this.page = 1;
+    this.key = '0558fb418099b1d6ef291e53504aa0aa';
   }
 
   async fetchMovies() {
-    const newCard = await axios.get(`/trending/all/week?${API_KEY}`);
-    const response = await newCard.data.results;
-    const page = await newCard.data.page;
-    const totalPages = await newCard.data.total_pages;
-    return response;
+    const response = await axios.get(`/trending/movie/day?api_key=${this.key}&page=${this.page}`);
+    return response.data;
   }
 
   async fetchGenre() {
-    const response = await axios.get(`/genre/movie/list?${API_KEY}&language=en-US'`);
-    return response.data.genres;
+    const response = await axios.get(`/genre/movie/list?api_key=${this.key}&language=en-US'`);
+    console.log(response.data);
+    return response.data;
   }
 
-  // incrementPage() {
-  //   this.page += 1;
-  // }
+  nextPage() {
+    this.page += 1;
+  }
 
-  // resetPage() {
-  //   this.page = 1;
-  // }
+  previousPage() {
+    this.page -= 1;
+  }
 
   get query() {
     return this.searchQuery;
@@ -39,26 +38,3 @@ export class MovieService {
     this.searchQuery = newQuery;
   }
 }
-
-// export const fetchMovie = async () => {
-//   const newCard = await axios.get(`/trending/all/week?${API_KEY}`);
-//   const response = await newCard.data.results;
-//   const page = await newCard.data.page;
-//   const totalPages = await newCard.data.total_pages;
-//   return response;
-// };
-
-const fetchGenre = async () => {
-  const response = await axios.get(`/genre/movie/list?${API_KEY}&language=en-US'`);
-  return response.data.genres;
-};
-
-console.log(fetchGenre());
-// export const fetchGenre = asyns() => {
-//   const genreFetch = await axios.get(`/genre/movie/list?${API_KEY}&language=en-US`);
-//   const response = await genreFetch.data;
-//    console.log(response)
-
-//   return response;
-
-// }
