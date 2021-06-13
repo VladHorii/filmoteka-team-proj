@@ -1,22 +1,29 @@
 import axios from 'axios';
 
-const API_KEY = 'api_key=0558fb418099b1d6ef291e53504aa0aa';
+// const API_KEY = 'api_key=0558fb418099b1d6ef291e53504aa0aa';
 
-axios.defaults.baseURL = 'https://api.themoviedb.org/3';
+// axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 
 export class MovieService {
   constructor() {
     this.searchQuery = '';
-    // this.page = page;
+    this.page = 1;
     this.id = '';
+    this.key = '371671d652209dac560f3fae909c95c7';
   }
 
-  async fetchMovies() {
+  /* async fetchMovies() {
     const newCard = await axios.get(`/trending/all/week?${API_KEY}`);
     const response = await newCard.data.results;
     const page = await newCard.data.page;
     const totalPages = await newCard.data.total_pages;
     return response;
+  } */
+
+  async fetchMovies() {
+    axios.defaults.baseURL = 'https://api.themoviedb.org/3/trending/';
+    const response = await axios.get(`movie/day?api_key=${this.key}&page=${this.page}`);
+    return response.data;
   }
 
   async fetchGenre() {
@@ -36,9 +43,13 @@ export class MovieService {
     }
   }
 
-  // incrementPage() {
-  //   this.page += 1;
-  // }
+  nextPage() {
+    this.page += 1;
+  }
+
+  previousPage() {
+    this.page -= 1;
+  }
 
   // resetPage() {
   //   this.page = 1;

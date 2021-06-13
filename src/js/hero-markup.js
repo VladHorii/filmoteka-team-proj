@@ -10,7 +10,7 @@ function makeMarkup(movie) {
 }
 
 async function markupMovies() {
-  const newMovieData = await movieService.fetchMovies();
+  const newMovieData = await movieService.fetchMovies().then(r => r.results);
   makeMarkup(newMovieData);
 }
 

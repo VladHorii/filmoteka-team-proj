@@ -1,21 +1,19 @@
-import ApiService from './api';
+import { MovieService } from './api-movie-service';
 import cardMarkupTpl from '../templates/movie-list.hbs';
 const ulTag = document.querySelector('.pagination__list');
-const btnPrev = document.querySelector('.btn-prev');
-const btnNext = document.querySelector('.btn-next');
 const galleryWrapper = document.querySelector('.gallery__list');
-const apiServiceP = new ApiService();
+const movieServiceP = new MovieService();
 
 function makeMarkupP(movie) {
   galleryWrapper.insertAdjacentHTML('beforeend', cardMarkupTpl(movie));
 }
 
 async function markupMoviesP() {
-  const newMovieData = await apiServiceP.fetchItems().then(data => data.results);
+  const newMovieData = await movieServiceP.fetchMovies().then(r => r.results);
   makeMarkupP(newMovieData);
 }
 
-apiServiceP.fetchItems().then(data => {
+movieServiceP.fetchMovies().then(data => {
   let totalPages = data.total_pages;
   let page = data.page;
   window.totalPages = totalPages;
@@ -26,16 +24,18 @@ apiServiceP.fetchItems().then(data => {
     let pageN = +e.target.dataset.number;
 
     if (e.target.classList.contains('btn-next')) {
-      apiServiceP.nextPage();
-      apiServiceP.page = pageN;
+      movieServiceP.nextPage();
+      movieServiceP.page = pageN;
+      console.log(movieServiceP.page);
       galleryWrapper.innerHTML = '';
       markupMoviesP();
     } else if (e.target.classList.contains('btn-prev')) {
-      apiServiceP.previousPage();
+      movieServiceP.previousPage();
+      movieServiceP.page = pageN;
       galleryWrapper.innerHTML = '';
       markupMoviesP();
     } else if (e.target.classList.contains('number')) {
-      apiServiceP.page = pageN;
+      movieServiceP.page = pageN;
       galleryWrapper.innerHTML = '';
       markupMoviesP();
     }
