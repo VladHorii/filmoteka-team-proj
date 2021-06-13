@@ -46,9 +46,10 @@
 .modal-movie {
   width: 100%;
   max-width: 618px;
+  padding: 0;
   margin: 0 auto;
 
-  transform: scale(0.75);
+  transform: scale(0);
   transform: translate(0, -150%);
   background-color: var(--secondary-text-color);
   transition-duration: var(--transition-duration);
@@ -155,40 +156,12 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
-    background-image: url('../images/sprite.svg#icon-modal-close');
-    // background-image: url('../images/close.svg');
+    fill: #000000;
+    // background-image: url('../../../src/images/sprite.svg#icon-modal-close');
+    background-image: url('../images/close.svg');
+    z-index: 5;
   }
 }
-
-// .card {
-//   display: flex;
-//   flex-wrap: wrap;
-
-//   &__item {
-//     &:not(:last-child) {
-//       margin-bottom: 30px;
-//     }
-//     @media screen and (min-width: 768px) {
-//       flex-basis: calc((100% - 1 * 30px) / 2);
-//       &:nth-child(2n + 1) {
-//         margin-right: 30px;
-//       }
-//       &:nth-last-child(-n + 2) {
-//         margin-bottom: 0;
-//       }
-//     }
-
-//     @media screen and (min-width: 1024px) {
-//       flex-basis: calc((100% - 2 * 30px) / 3);
-//       &:not(:nth-child(3n + 3)) {
-//         margin-right: 30px;
-//       }
-//       &:nth-last-child(-n + 3) {
-//         margin-bottom: 0;
-//       }
-//     }
-//   }
-// }
 
 .vote {
   display: inline-block;
@@ -214,3 +187,7 @@
   color: var(--accent-color);
   fill: var(--accent-color);
 }
+
+// * {
+//   outline: 1px solid tomato;
+// }

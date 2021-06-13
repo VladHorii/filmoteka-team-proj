@@ -8,6 +8,7 @@ export class MovieService {
   constructor() {
     this.searchQuery = '';
     // this.page = page;
+    this.id = '';
   }
 
   async fetchMovies() {
@@ -21,6 +22,18 @@ export class MovieService {
   async fetchGenre() {
     const response = await axios.get(`/genre/movie/list?${API_KEY}&language=en-US'`);
     return response.data.genres;
+  }
+
+  async fetchMovieInfo() {
+    try {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/movie/${this.id}?${API_KEY}&language=en-US`,
+      );
+      const movieInfo = response.data;
+      return movieInfo;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   // incrementPage() {
