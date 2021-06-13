@@ -65,6 +65,9 @@
     margin-right: 10px;
     height: 24px;
     width: 24px;
+    animation: tada;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
   }
 
   &-logo-name {
@@ -123,6 +126,13 @@
     color: var(--secondary-text-color);
     cursor: pointer;
     position: relative;
+    transition-duration: 250ms;
+    transition-property: color;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  &-navigation-page:hover,
+  &-navigation-page:hover {
+    color: var(--accent-color);
   }
   .current:after {
     content: '';
