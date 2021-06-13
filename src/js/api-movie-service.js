@@ -18,8 +18,18 @@ export class MovieService {
 
   async fetchGenre() {
     const response = await axios.get(`/genre/movie/list?api_key=${this.key}&language=en-US'`);
-    console.log(response.data);
+    // console.log(response.data);
     return response.data;
+  }
+
+  async fetchMovieInfo() {
+    try {
+      const response = await axios.get(`/movie/${this.id}?api_key=${this.key}&language=en-US`);
+      const movieInfo = response.data;
+      return movieInfo;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   nextPage() {
