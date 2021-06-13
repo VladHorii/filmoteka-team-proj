@@ -42,8 +42,11 @@ img {
   height: auto;
 }
 
+a {
+  transition: color 250ms var(--transition-timing-function);
+}
+
 a:hover,
 a:focus {
   color: var(--accent-color);
-  transition: color 250ms var(--transition-timing-function);
 }
