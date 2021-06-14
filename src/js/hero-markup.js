@@ -36,6 +36,8 @@ function getGenre(genre) {
   });
 }
 
+// export { markupMovies, makeMarkup, getGenre };
+
 // function fetchGender
 
 // function cutDate(data) {
