@@ -2,18 +2,31 @@ import { MovieService } from './api-movie-service';
 import cardMarkupTpl from '../templates/movie-list.hbs';
 const ulTag = document.querySelector('.pagination__list');
 const galleryWrapper = document.querySelector('.gallery__list');
-const movieServiceP = new MovieService();
+const movieService = new MovieService();
 
-function makeMarkupP(movie) {
-  galleryWrapper.insertAdjacentHTML('beforeend', cardMarkupTpl(movie));
+function makeMarkup(movies, genres) {
+  galleryWrapper.insertAdjacentHTML('beforeend', cardMarkupTpl({ movies }, { genres }));
 }
 
-async function markupMoviesP() {
-  const newMovieData = await movieServiceP.fetchMovies().then(r => r.results);
-  makeMarkupP(newMovieData);
+async function markupMovies() {
+  const movieData = await movieService.fetchMovies().then(r => r.results);
+  const genreData = await movieService.fetchGenre().then(r => r.genres);
+  makeMarkup(movieData, genreData);
+  getGenre(genreData);
 }
 
-movieServiceP.fetchMovies().then(data => {
+function getGenre(genre) {
+  genre.forEach(e => {
+    const movieGenre = document.querySelectorAll('.gallery-title-block__item');
+    movieGenre.forEach(genreName => {
+      if (Number(genreName.textContent) === e.id) {
+        genreName.textContent = e.name;
+      }
+    });
+  });
+}
+
+movieService.fetchMovies().then(data => {
   let totalPages = data.total_pages;
   let page = data.page;
   window.totalPages = totalPages;
@@ -24,20 +37,19 @@ movieServiceP.fetchMovies().then(data => {
     let pageN = +e.target.dataset.number;
 
     if (e.target.classList.contains('btn-next')) {
-      movieServiceP.nextPage();
-      movieServiceP.page = pageN;
-      console.log(movieServiceP.page);
+      movieService.nextPage();
+      movieService.page = pageN;
       galleryWrapper.innerHTML = '';
-      markupMoviesP();
+      markupMovies();
     } else if (e.target.classList.contains('btn-prev')) {
-      movieServiceP.previousPage();
-      movieServiceP.page = pageN;
+      movieService.previousPage();
+      movieService.page = pageN;
       galleryWrapper.innerHTML = '';
-      markupMoviesP();
+      markupMovies();
     } else if (e.target.classList.contains('number')) {
-      movieServiceP.page = pageN;
+      movieService.page = pageN;
       galleryWrapper.innerHTML = '';
-      markupMoviesP();
+      markupMovies();
     }
   }
 
@@ -124,7 +136,7 @@ function paginationMobile(totalPages, page) {
     liTag += `<li class="number ${activeLi}" data-number="${pageLength}" onclick="paginationMobile(totalPages, ${pageLength})">${pageLength}</li>`;
   }
 
-  //show the next button if the page value is less than totalPage(20)
+  //show the next button if the page value is less than totalPage
   if (page < totalPages) {
     liTag += `<li class="btn-arrow btn-next" data-number="${
       page + 1
@@ -148,7 +160,6 @@ function paginationTabDesk(totalPages, page) {
     	&#10094;</li>`;
   }
 
-  //if page value is less than 2 then add 1 after the previous button
   if (page > 3 && totalPages > 7) {
     liTag += `<li class="number" data-number="1" onclick="paginationTabDesk(totalPages, 1)">1</li>`;
   }
@@ -220,15 +231,13 @@ function paginationTabDesk(totalPages, page) {
   }
 
   if (page < totalPages - 2 && totalPages > 7) {
-    //if page value is less than totalPage value by -1 then show the last li or page
     if (page < totalPages - 3 && totalPages > 8) {
-      //if page value is less than totalPage value by -2 then add this (...) before the last li or page
       liTag += `<li class="dots">...</li>`;
     }
     liTag += `<li class="number" data-number="${totalPages}" onclick="paginationTabDesk(totalPages, ${totalPages})">${totalPages}</li>`;
   }
 
-  //show the next button if the page value is less than totalPage(20)
+  //show the next button if the page value is less than totalPage
   if (page < totalPages) {
     liTag += `<li class="btn-arrow btn-next" data-number="${
       page + 1
@@ -241,19 +250,3 @@ function paginationTabDesk(totalPages, page) {
 
 window.paginationMobile = paginationMobile;
 window.paginationTabDesk = paginationTabDesk;
-
-/* if (window.matchMedia('(max-width: 367px)').matches) {
-  paginationMobile(totalPages, 3);
-} else {
-  paginationTabDesk(totalPages, 3);
-}
-
-function onPagination() {
-  if (window.matchMedia('(max-width: 367px)').matches) {
-    paginationMobile(totalPages, 3);
-  } else {
-    paginationTabDesk(totalPages, 3);
-  }
-}
-
-window.addEventListener('resize', onPagination); */
