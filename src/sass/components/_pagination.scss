@@ -31,7 +31,7 @@
 
   &.btn-arrow {
     color: var(--primary-text-color);
-    background-color: rgba(208, 205, 205, 0.9);
+    background-color: #efefef;
     transition: background-color var(--transition-duration) var(--transition-timing-function);
   }
 
@@ -50,6 +50,11 @@
     color: var(--secondary-text-color);
     background-color: var(--accent-color);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  &.btn-arrow:hover,
+  &.btn-arrow:focus {
+    background-color: #858585;
   }
 
   &.number.active {

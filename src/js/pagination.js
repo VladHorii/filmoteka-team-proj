@@ -16,6 +16,7 @@ movieService.fetchMovies().then(data => {
   let page = data.page;
   window.totalPages = totalPages;
 
+  window.addEventListener('resize', onPagination);
   ulTag.addEventListener('click', onPages);
 
   function onPages(e) {
@@ -38,21 +39,15 @@ movieService.fetchMovies().then(data => {
     }
   }
 
-  function choosePagination() {
+  onPagination();
+
+  function onPagination() {
     if (window.matchMedia('(max-width: 367px)').matches) {
       paginationMobile(totalPages, page);
     } else {
       paginationTabDesk(totalPages, page);
     }
   }
-
-  choosePagination();
-
-  function onPagination() {
-    choosePagination();
-  }
-
-  window.addEventListener('resize', onPagination);
 });
 
 function paginationMobile(totalPages, page) {
