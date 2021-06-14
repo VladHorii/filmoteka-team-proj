@@ -1,6 +1,5 @@
 import { MovieService } from './api-movie-service';
 import cardMarkupTpl from '../templates/movie-list.hbs';
-// import { markupMovies, makeMarkup, getGenre } from './hero-markup';
 const ulTag = document.querySelector('.pagination__list');
 const galleryWrapper = document.querySelector('.gallery__list');
 const movieService = new MovieService();
@@ -137,7 +136,7 @@ function paginationMobile(totalPages, page) {
     liTag += `<li class="number ${activeLi}" data-number="${pageLength}" onclick="paginationMobile(totalPages, ${pageLength})">${pageLength}</li>`;
   }
 
-  //show the next button if the page value is less than totalPage(20)
+  //show the next button if the page value is less than totalPage
   if (page < totalPages) {
     liTag += `<li class="btn-arrow btn-next" data-number="${
       page + 1
@@ -161,7 +160,6 @@ function paginationTabDesk(totalPages, page) {
     	&#10094;</li>`;
   }
 
-  //if page value is less than 2 then add 1 after the previous button
   if (page > 3 && totalPages > 7) {
     liTag += `<li class="number" data-number="1" onclick="paginationTabDesk(totalPages, 1)">1</li>`;
   }
@@ -233,15 +231,13 @@ function paginationTabDesk(totalPages, page) {
   }
 
   if (page < totalPages - 2 && totalPages > 7) {
-    //if page value is less than totalPage value by -1 then show the last li or page
     if (page < totalPages - 3 && totalPages > 8) {
-      //if page value is less than totalPage value by -2 then add this (...) before the last li or page
       liTag += `<li class="dots">...</li>`;
     }
     liTag += `<li class="number" data-number="${totalPages}" onclick="paginationTabDesk(totalPages, ${totalPages})">${totalPages}</li>`;
   }
 
-  //show the next button if the page value is less than totalPage(20)
+  //show the next button if the page value is less than totalPage
   if (page < totalPages) {
     liTag += `<li class="btn-arrow btn-next" data-number="${
       page + 1
