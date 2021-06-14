@@ -1,26 +1,64 @@
 <!-- Head of the page with navigation and contacts -->
-<header>
+<head>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+</head>
+
+<header id="page-header" class="header header-home">
+  <!-- switch class header-library -->
   <div class="header-container container">
     <include src="./partials/theme-switch.html"></include>
 
-    <div class="header-navigation">
+    <!-- <nav class="header-navigation">
+      <a class="header-logo-link" href="#home" lang="en" data-link>
+        <svg class="header-logo-icon animate__animated animate__fadeInUp">
+          <use href="./images/sprite.svg#icon-header-film"></use>
+        </svg>
+        <span class="header-logo-name">Filmoteka</span>
+      </a>
+
+      <ul id="page-nav" class="header-navigation-list">
+        <li class="header-navigation-item">
+          <a class="header-navigation-page is-current" href="#home" data-link>home</a>
+        </li>
+        <li class="header-navigation-item">
+          <a class="header-navigation-page" href="#library" data-link>my library</a>
+        </li>
+      </ul>
+    </nav>
+======= -->
+    <nav class="header-navigation">
       <div class="header-logo">
-        <a class="header-logo-link" href="./index.html" lang="en">
-          <span class="header-logo-icon"></span>
+        <a class="header-logo-link" href="#home" lang="en" data-link>
+          <svg class="header-logo-icon animate__animated animate__fadeInUp">
+            <use href="./images/sprite.svg#icon-header-film"></use>
+          </svg>
           <span class="header-logo-name">Filmoteka</span>
         </a>
       </div>
-      <div class="header-menu">
-        <ul class="header-navigation-list">
-          <li class="header-navigation-item">
-            <a class="header-navigation-page is-current" href="./index.html">home</a>
-          </li>
-          <li class="header-navigation-item">
-            <a class="header-navigation-page" href="#">my library</a>
-          </li>
-        </ul>
-      </div>
-    </div>
+
+      <!-- <div class="header-menu"> -->
+      <ul class="header-navigation-list" id="page-nav">
+        <li class="header-navigation-item">
+          <a class="header-navigation-page is-current" href="#home" data-link>home</a>
+        </li>
+        <li class="header-navigation-item visually-hidden">
+          <a class="header-navigation-page js-my-library-btn" href="#library" data-link>
+            my library
+          </a>
+        </li>
+        <li class="header-navigation-item">
+          <a class="header-navigation-page js-auth-btn" href="#" data-modal-open>Sign IN</a>
+        </li>
+        <li class="header-navigation-item visually-hidden">
+          <a class="header-navigation-page js-logout-btn" href="#">Logout</a>
+        </li>
+      </ul>
+      <!-- </div> -->
+    </nav>
+
     <form class="header-search-form" id="search-form">
       <input
         class="header-search-field"
@@ -35,6 +73,10 @@
     </form>
     <div class="header-notification visually-hidden">
       Search result not successful. Enter the correct movie name
+    </div>
+    <div class="btn-flex header__actions">
+      <button type="button" class="btn current-btn">watched</button>
+      <button type="button" class="btn">queue</button>
     </div>
   </div>
 </header>

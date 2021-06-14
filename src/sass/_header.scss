@@ -1,3 +1,6 @@
+.header-navigation-item + .header-navigation-item {
+  margin-left: 40px;
+}
 .header {
   &-container {
     padding-top: 46px;
@@ -13,6 +16,7 @@
 
   &-logo {
     display: block;
+    align-content: center;
 
     height: 24px;
   }
@@ -22,11 +26,10 @@
   }
   &-logo-icon {
     display: block;
+    align-items: center;
 
     height: 24px;
     width: 24px;
-
-    background-color: blue;
   }
 
   &-logo-name {
@@ -53,7 +56,7 @@
     align-items: center;
     justify-content: space-between;
 
-    width: 143px;
+    // width: 143px;
   }
 
   &-navigation-page {

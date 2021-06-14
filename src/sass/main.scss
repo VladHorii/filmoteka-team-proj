@@ -9,12 +9,13 @@
 // base
 @import './base/container';
 @import './base/common';
-@import './components/button';
+@import './registration-form';
 @import './utils/variables';
-@import './header';
+@import './utils/mixin';
+@import './layout/index/header-home';
+@import './layout/index/header-library';
 @import './footer';
 @import './students';
-@import './components/pagination';
 //layout
 @import './layout/index/hero';
 
@@ -22,3 +23,9 @@
 @import './theme-switch';
 // components
 @import './components/scroll-top-btn';
+@import './components/button';
+@import './components/pagination';
+@import './components/modal-movie-card';
+@import './components/button-modal';
+//utils
+@import './utils/variables';
