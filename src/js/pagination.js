@@ -1,30 +1,14 @@
 import { MovieService } from './api-movie-service';
-import cardMarkupTpl from '../templates/movie-list.hbs';
-// import { markupMovies, makeMarkup, getGenre } from './hero-markup';
+import { getGenre, makeMarkup } from './hero-markup';
 const ulTag = document.querySelector('.pagination__list');
 const galleryWrapper = document.querySelector('.gallery__list');
 const movieService = new MovieService();
-
-function makeMarkup(movies, genres) {
-  galleryWrapper.insertAdjacentHTML('beforeend', cardMarkupTpl({ movies }, { genres }));
-}
 
 async function markupMovies() {
   const movieData = await movieService.fetchMovies().then(r => r.results);
   const genreData = await movieService.fetchGenre().then(r => r.genres);
   makeMarkup(movieData, genreData);
   getGenre(genreData);
-}
-
-function getGenre(genre) {
-  genre.forEach(e => {
-    const movieGenre = document.querySelectorAll('.gallery-title-block__item');
-    movieGenre.forEach(genreName => {
-      if (Number(genreName.textContent) === e.id) {
-        genreName.textContent = e.name;
-      }
-    });
-  });
 }
 
 movieService.fetchMovies().then(data => {

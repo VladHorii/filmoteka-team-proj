@@ -36,7 +36,7 @@ function getGenre(genre) {
   });
 }
 
-// export { markupMovies, makeMarkup, getGenre };
+export { getGenre, makeMarkup };
 
 // function fetchGender
 
