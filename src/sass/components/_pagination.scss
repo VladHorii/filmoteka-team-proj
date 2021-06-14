@@ -31,12 +31,12 @@
 
   &.btn-arrow {
     color: var(--primary-text-color);
-    background-color: #fdfdfd;
-    transition: background-color 250ms var(--transition-timing-function);
+    background-color: rgba(208, 205, 205, 0.9);
+    transition: background-color var(--transition-duration) var(--transition-timing-function);
   }
 
   &.number {
-    transition: background-color 250ms var(--transition-timing-function);
+    transition: background-color var(--transition-duration) var(--transition-timing-function);
   }
 
   &.dots {
