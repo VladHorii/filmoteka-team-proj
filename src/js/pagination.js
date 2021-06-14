@@ -1,19 +1,33 @@
 import { MovieService } from './api-movie-service';
 import cardMarkupTpl from '../templates/movie-list.hbs';
+// import { markupMovies, makeMarkup, getGenre } from './hero-markup';
 const ulTag = document.querySelector('.pagination__list');
 const galleryWrapper = document.querySelector('.gallery__list');
-const movieServiceP = new MovieService();
+const movieService = new MovieService();
 
-function makeMarkupP(movie) {
-  galleryWrapper.insertAdjacentHTML('beforeend', cardMarkupTpl(movie));
+function makeMarkup(movies, genres) {
+  galleryWrapper.insertAdjacentHTML('beforeend', cardMarkupTpl({ movies }, { genres }));
 }
 
-async function markupMoviesP() {
-  const newMovieData = await movieServiceP.fetchMovies().then(r => r.results);
-  makeMarkupP(newMovieData);
+async function markupMovies() {
+  const movieData = await movieService.fetchMovies().then(r => r.results);
+  const genreData = await movieService.fetchGenre().then(r => r.genres);
+  makeMarkup(movieData, genreData);
+  getGenre(genreData);
 }
 
-movieServiceP.fetchMovies().then(data => {
+function getGenre(genre) {
+  genre.forEach(e => {
+    const movieGenre = document.querySelectorAll('.gallery-title-block__item');
+    movieGenre.forEach(genreName => {
+      if (Number(genreName.textContent) === e.id) {
+        genreName.textContent = e.name;
+      }
+    });
+  });
+}
+
+movieService.fetchMovies().then(data => {
   let totalPages = data.total_pages;
   let page = data.page;
   window.totalPages = totalPages;
@@ -24,20 +38,19 @@ movieServiceP.fetchMovies().then(data => {
     let pageN = +e.target.dataset.number;
 
     if (e.target.classList.contains('btn-next')) {
-      movieServiceP.nextPage();
-      movieServiceP.page = pageN;
-      console.log(movieServiceP.page);
+      movieService.nextPage();
+      movieService.page = pageN;
       galleryWrapper.innerHTML = '';
-      markupMoviesP();
+      markupMovies();
     } else if (e.target.classList.contains('btn-prev')) {
-      movieServiceP.previousPage();
-      movieServiceP.page = pageN;
+      movieService.previousPage();
+      movieService.page = pageN;
       galleryWrapper.innerHTML = '';
-      markupMoviesP();
+      markupMovies();
     } else if (e.target.classList.contains('number')) {
-      movieServiceP.page = pageN;
+      movieService.page = pageN;
       galleryWrapper.innerHTML = '';
-      markupMoviesP();
+      markupMovies();
     }
   }
 
@@ -241,19 +254,3 @@ function paginationTabDesk(totalPages, page) {
 
 window.paginationMobile = paginationMobile;
 window.paginationTabDesk = paginationTabDesk;
-
-/* if (window.matchMedia('(max-width: 367px)').matches) {
-  paginationMobile(totalPages, 3);
-} else {
-  paginationTabDesk(totalPages, 3);
-}
-
-function onPagination() {
-  if (window.matchMedia('(max-width: 367px)').matches) {
-    paginationMobile(totalPages, 3);
-  } else {
-    paginationTabDesk(totalPages, 3);
-  }
-}
-
-window.addEventListener('resize', onPagination); */
