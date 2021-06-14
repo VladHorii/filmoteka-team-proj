@@ -1,4 +1,4 @@
-refs = {
+const refs = {
   openStudentsModal: document.querySelector('[data-students-modal-open]'),
   closeStudentsModal: document.querySelector('[data-students-modal-close]'),
   studentsModal: document.querySelector('[data-students-modal]'),
