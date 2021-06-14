@@ -1,4 +1,5 @@
 import './sass/main.scss';
+import './js/constants';
 import './js/toggleHeader';
 import './js/theme-switch';
 import './js/movie-service';
@@ -9,7 +10,7 @@ import './js/students-modal';
 import './js/pagination';
 import './js/spinner';
 import './js/theme-switch';
-import './js/scrollTopBtn';
+import './js/scroll-top-btn';
 import './js/aos';
 import './js/modal-movie-card';
 import './js/api';
