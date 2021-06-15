@@ -1,4 +1,5 @@
 import './sass/main.scss';
+import './js/body-scroll-lock';
 import './js/constants';
 import './js/toggleHeader';
 import './js/theme-switch';

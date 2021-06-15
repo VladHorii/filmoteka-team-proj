@@ -1,5 +1,7 @@
 import { MovieService } from './api-movie-service';
 import modalCardTpl from '../templates/modal-card.hbs';
+import { disableBodyScroll } from 'body-scroll-lock';
+import { enableBodyScroll } from 'body-scroll-lock';
 
 const apiItems = new MovieService();
 
@@ -36,6 +38,8 @@ function onModalOpen(e) {
   apiItems.id = e.target.parentNode.dataset.id;
   fetchMovieInfo();
   window.addEventListener('keydown', onModalClose);
+
+  disableBodyScroll(modal);
 }
 
 function onModalClose(e) {
@@ -49,6 +53,8 @@ function onModalClose(e) {
     toggleVisuallyHidden();
     window.removeEventListener('keydown', onModalClose);
   }
+
+  enableBodyScroll(modal);
 }
 
 function toggleIsOpenClass() {
