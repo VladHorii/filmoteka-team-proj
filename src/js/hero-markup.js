@@ -10,10 +10,15 @@ const movieService = new MovieService();
 async function markupMovies() {
   const movieData = await movieService.fetchMovies().then(r => r.results);
   const genreData = await movieService.fetchGenre().then(r => r.genres);
-  makeMarkup(movieData, genreData);
-  getGenre(genreData);
 
-  // console.log(genreData);
+  console.log(genreData);
+  makeMarkup(movieData, genreData);
+  console.log(genreData);
+  getGenre(genreData);
+  cutGenresList(genreData);
+  console.log(cutGenresList(genreData));
+  // createGenresFromID(genreData);
+
   // createYear(movie);
   // console.log(createYear(movie));
 }
@@ -28,6 +33,8 @@ function makeMarkup(movies, genres) {
 function getGenre(genre) {
   genre.forEach(e => {
     const movieGenre = document.querySelectorAll('.gallery-title-block__item');
+    // const fullDateOfRelease = film.release_date || film.first_air_date || '0000-00-00';
+    // const yearOfRelease = fullDateOfRelease.split('-')[0];
     movieGenre.forEach(genreName => {
       if (Number(genreName.textContent) === e.id) {
         genreName.textContent = e.name;
@@ -36,6 +43,18 @@ function getGenre(genre) {
   });
 }
 
+function cutGenresList(array) {
+  return array
+    .map(genre => genre.name)
+    .slice(0, 3)
+    .flat();
+}
+
+// function yearOfDate(obj) {
+//   return obj.release_date ? obj.release_date.split('-')[0] : '';
+// }
+
+//=======================
 // function fetchGender
 
 // function cutDate(data) {
@@ -54,3 +73,8 @@ function getGenre(genre) {
 //   console.log(createDate(data));
 // });
 // console.log(createDate(data));
+
+//=========================
+
+// const fullDateOfRelease = film.release_date || film.first_air_date || '0000-00-00';
+// const yearOfRelease = fullDateOfRelease.split('-')[0];

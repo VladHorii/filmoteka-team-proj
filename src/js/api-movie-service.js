@@ -8,6 +8,7 @@ export class MovieService {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
+    this.id = '';
     this.key = '0558fb418099b1d6ef291e53504aa0aa';
   }
 

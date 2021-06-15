@@ -12,4 +12,11 @@
 //     .flat();
 // }
 
+function createGenresFromID(array) {
+  return array.genres
+    .map(genre => genre.name)
+    .slice(0, 3)
+    .flat();
+}
+
 // export { cutGenresListForHero };
