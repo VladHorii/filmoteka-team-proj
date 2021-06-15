@@ -2,6 +2,8 @@ import { MovieService } from './api-movie-service';
 import { getGenre, makeMarkup } from './hero-markup';
 const ulTag = document.querySelector('.pagination__list');
 const galleryWrapper = document.querySelector('.gallery__list');
+const logo = document.querySelector('.header-logo-link');
+const pagNumber = document.querySelector('.number');
 const movieService = new MovieService();
 
 async function markupMovies() {
@@ -18,6 +20,14 @@ movieService.fetchMovies().then(data => {
 
   window.addEventListener('resize', onPagination);
   ulTag.addEventListener('click', onPages);
+  logo.addEventListener('click', onResetPage);
+
+  function onResetPage(e) {
+    movieService.page = 1;
+    galleryWrapper.innerHTML = '';
+    onPagination();
+    markupMovies();
+  }
 
   function onPages(e) {
     let pageN = +e.target.dataset.number;
