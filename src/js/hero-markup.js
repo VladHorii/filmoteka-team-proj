@@ -1,7 +1,5 @@
 import { MovieService } from './api-movie-service';
 
-// import { cutGenresListForHero } from './data/data';
-
 import cardMarkupTpl from '../templates/movie-list.hbs';
 
 const cardMarkup = document.querySelector('.gallery__list');
@@ -11,23 +9,29 @@ async function markupMovies() {
   const movieData = await movieService.fetchMovies().then(r => r.results);
   const genreData = await movieService.fetchGenre().then(r => r.genres);
 
-  console.log(genreData);
-  makeMarkup(movieData, genreData);
-  console.log(genreData);
-  getGenre(genreData);
-  cutGenresList(genreData);
-  console.log(cutGenresList(genreData));
-  // createGenresFromID(genreData);
+  movieData.forEach(film => {
+    const dateOfRelease = film.release_date || film.first_air_date || 'unknown date';
 
-  // createYear(movie);
-  // console.log(createYear(movie));
+    const genres = film.genre_ids
+      .map((genre, idx) => genreData.find(g => g.id === genre).name)
+      .slice(0, 3)
+      .join(', ');
+
+    const card = {
+      id: film.id,
+      posterPath: film.poster_path,
+      title: film.title || film.name,
+      relDate: dateOfRelease.split('-')[0],
+      genres,
+    };
+    makeMarkup(card);
+  });
 }
 
 markupMovies();
 
-function makeMarkup(movies, genres) {
-  // console.log(cardMarkupTpl({ movies }));
-  cardMarkup.insertAdjacentHTML('beforeend', cardMarkupTpl({ movies }, { genres }));
+function makeMarkup(movies) {
+  cardMarkup.insertAdjacentHTML('beforeend', cardMarkupTpl(movies));
 }
 
 function getGenre(genre) {
