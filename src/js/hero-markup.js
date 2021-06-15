@@ -12,10 +12,13 @@ async function markupMovies() {
   movieData.forEach(film => {
     const dateOfRelease = film.release_date || film.first_air_date || 'unknown date';
 
-    const genres = film.genre_ids
-      .map((genre, idx) => genreData.find(g => g.id === genre).name)
-      .slice(0, 3)
-      .join(', ');
+    let genres = film.genre_ids.map((genre, idx) => genreData.find(g => g.id === genre).name);
+
+    if (genres.length > 2) {
+      genres = genres.slice(0, 2);
+      genres.push('Other');
+    }
+    genres = genres.join(', ');
 
     const card = {
       id: film.id,
