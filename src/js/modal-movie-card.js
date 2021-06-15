@@ -3,6 +3,10 @@ import modalCardTpl from '../templates/modal-card.hbs';
 import { disableBodyScroll } from 'body-scroll-lock';
 import { enableBodyScroll } from 'body-scroll-lock';
 
+import { AddToDataBase } from './components/add-to-base';
+
+const addToDataBase = new AddToDataBase();
+
 const apiItems = new MovieService();
 
 const cards = document.querySelector('.gallery__list');
@@ -17,6 +21,25 @@ async function fetchMovieInfo(e) {
     const movieCard = await apiItems.fetchMovieInfo();
     modal.insertAdjacentHTML('beforeend', modalCardTpl(movieCard));
     toggleIsOpenClass(e);
+
+    document.querySelector('.modal-button-watched').addEventListener('click', e => {
+      const filmID = e.currentTarget.dataset.id;
+      addToDataBase
+        .addToWatched(filmID)
+        .then(r => console.log('Фильм добавлен'))
+        .catch(error => {
+          console.log(error.message);
+        });
+    });
+    document.querySelector('.modal-button-queue').addEventListener('click', e => {
+      const filmID = e.currentTarget.dataset.id;
+      addToDataBase
+        .addToQueue(filmID)
+        .then(r => console.log('Фильм добавлен'))
+        .catch(error => {
+          console.log(error.message);
+        });
+    });
   } catch (error) {
     console.log(error);
   }

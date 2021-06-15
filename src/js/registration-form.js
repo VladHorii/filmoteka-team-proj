@@ -3,6 +3,7 @@ import { disableBodyScroll } from 'body-scroll-lock';
 import { enableBodyScroll } from 'body-scroll-lock';
 
 const auth = new Authorization();
+auth.init();
 
 document.querySelector('.modal-form__signin').addEventListener('submit', e => {
   e.preventDefault();

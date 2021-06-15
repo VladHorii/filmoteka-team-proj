@@ -14,3 +14,4 @@ import './js/scroll-top-btn';
 import './js/aos';
 import './js/modal-movie-card';
 import './js/api';
+import './js/components/add-to-base';
