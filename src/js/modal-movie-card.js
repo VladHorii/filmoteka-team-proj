@@ -1,5 +1,7 @@
 import { MovieService } from './api-movie-service';
 import modalCardTpl from '../templates/modal-card.hbs';
+import { disableBodyScroll } from 'body-scroll-lock';
+import { enableBodyScroll } from 'body-scroll-lock';
 
 const apiItems = new MovieService();
 // =========   modal   ==========
@@ -35,6 +37,8 @@ function onModalOpen(e) {
   toggleBackdropClass(e);
   fetchMovieInfo();
   window.addEventListener('keydown', onModalClose);
+
+  disableBodyScroll(modal);
 }
 
 function toggleBackdropClass() {
@@ -51,6 +55,8 @@ function onModalClose(e) {
     clearMovieCard();
     window.removeEventListener('keydown', onModalClose);
   }
+
+  enableBodyScroll(modal);
 }
 
 function clearMovieCard() {

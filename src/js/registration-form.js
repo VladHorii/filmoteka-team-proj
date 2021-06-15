@@ -1,4 +1,6 @@
 import Authorization from './auth';
+import { disableBodyScroll } from 'body-scroll-lock';
+import { enableBodyScroll } from 'body-scroll-lock';
 
 const auth = new Authorization();
 
@@ -14,6 +16,7 @@ document.querySelector('.modal-form__signin').addEventListener('submit', e => {
   auth.auth(data.email, data.pass).then(response => {
     if (response === data.email) {
       toggleModal();
+      enableBodyScroll(refs.modal);
       document.querySelector('.modal-form__status').textContent = '';
     } else {
       // Действие при неправильном пароле
@@ -50,6 +53,7 @@ document.querySelector('.modal-form__signup').addEventListener('submit', e => {
   auth.register(data.email, data.name, data.pass).then(response => {
     if (response === data.email) {
       toggleModal();
+      enableBodyScroll(refs.modal);
       document.querySelector('.modal-form__status').textContent = '';
     } else {
       // Действие при неправильном пароле
@@ -101,5 +105,11 @@ refs.formSwitcher.addEventListener('click', e => {
   }
 });
 
-refs.closeModalBtn.addEventListener('click', toggleModal);
-refs.openModalBtn.addEventListener('click', toggleModal);
+refs.closeModalBtn.addEventListener('click', function () {
+  toggleModal();
+  enableBodyScroll(refs.modal);
+});
+refs.openModalBtn.addEventListener('click', function () {
+  toggleModal();
+  disableBodyScroll(refs.modal);
+});
