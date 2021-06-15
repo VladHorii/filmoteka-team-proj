@@ -36,6 +36,8 @@ function getGenre(genre) {
   });
 }
 
+export { getGenre, makeMarkup };
+
 // function fetchGender
 
 // function cutDate(data) {
