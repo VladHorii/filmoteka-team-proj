@@ -1,10 +1,17 @@
 <li class='gallery__list-item' data-aos='zoom-in'>
   <a class='gallery__list-link' href='' data-id={{this.id}}>
-    <img
-      class='card_img'
-      src='https://image.tmdb.org/t/p/w500{{this.posterPath}}'
-      alt='{{this.title}}'
-    />
+    {{#if this.posterPath}}
+      <img
+        class='card_img'
+        src='https://image.tmdb.org/t/p/w500{{this.posterPath}}'
+        alt='{{this.title}}'
+        width='274'
+        height='398'
+      />
+    {{else}}
+      <p class='gallery__list-noimg'>Movie photo not found</p>
+    {{/if}}
+
   </a>
   <div class='gallery-title-block'>
     <h2 class='gallery-title-block__title'>
@@ -12,7 +19,11 @@
     </h2>
     <div class='gallery-title-block__info'>
       <p>{{this.genres}}</p>
-      <span class='gallery-title-block__separator'>|</span>
+
+      {{#if this.genres}}
+        <span class='gallery-title-block__separator'>|</span>
+      {{/if}}
+
       <div>
         {{this.relDate}}
       </div>
