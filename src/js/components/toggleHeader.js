@@ -1,3 +1,6 @@
+import { setWatchedAndQueueMarkup, setMarkup } from './my-library';
+import { markupMovies } from '../markup/hero-markup';
+
 const refs = {
   onHomeBtn: document.getElementById('btn-home'),
   onLibraryBtn: document.getElementById('btn-library'),
@@ -11,7 +14,7 @@ const refs = {
 
 refs.onHomeBtn.classList.add('is-current');
 refs.libraryBtnContainer.classList.add('display-none');
-refs.onWatchedBtn.classList.add('current-btn');
+// refs.onWatchedBtn.classList.add('current-btn');
 
 class CurrentPage {
   homeBtn() {
@@ -34,6 +37,8 @@ function onHomeBtnClassList() {
   refs.libraryBtnContainer.classList.add('is-hidden');
   refs.libraryBtnContainer.classList.remove('btn-flex');
   refs.header.classList.remove('header-library');
+
+  markupMovies();
 }
 function onLibraryBtnClassList() {
   refs.onLibraryBtn.classList.add('is-current');
@@ -42,7 +47,9 @@ function onLibraryBtnClassList() {
   refs.libraryBtnContainer.classList.add('btn-flex');
   refs.onHomeBtn.classList.remove('is-current');
   refs.header.classList.add('header-library');
-  queueBtnClick();
+  // queueBtnClick();
+
+  setWatchedAndQueueMarkup();
 }
 refs.onHomeBtn.addEventListener('click', currentPage.homeBtn);
 refs.onLibraryBtn.addEventListener('click', currentPage.libraryBtn);
@@ -54,10 +61,12 @@ function WatchedBtnClick() {
   } else {
     refs.onWatchedBtn.classList.add('current-btn');
   }
+  setMarkup('watched');
 }
 function queueBtnClick() {
   refs.onQueueBtn.classList.add('current-btn');
   refs.onWatchedBtn.classList.remove('current-btn');
+  setMarkup('queue');
 }
 refs.onWatchedBtn.addEventListener('click', WatchedBtnClick);
 refs.onQueueBtn.addEventListener('click', queueBtnClick);
