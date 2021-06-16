@@ -1,23 +1,22 @@
-import { MovieService } from './api-movie-service';
-import modalCardTpl from '../templates/modal-card.hbs';
+import { MovieService } from '../api-movie-service';
+import modalCardTpl from '../../templates/modal-card.hbs';
+import { disableBodyScroll } from 'body-scroll-lock';
+import { enableBodyScroll } from 'body-scroll-lock';
 
 const apiItems = new MovieService();
-// =========   modal   ==========
 
 const cards = document.querySelector('.gallery__list');
 const modal = document.querySelector('.js-modal-movie');
 const backdrop = document.querySelector('.js-backdrop-movie');
-// const modalCloseBtn = document.querySelector('icon-modal-close');
 
 cards.addEventListener('click', onModalOpen);
 backdrop.addEventListener('click', onModalClose);
-// modalCloseBtn.addEventListener('click', onModalClose);
 
-async function fetchMovieInfo() {
+async function fetchMovieInfo(e) {
   try {
     const movieCard = await apiItems.fetchMovieInfo();
-    const markupMovieCard = modalCardTpl(movieCard);
-    modal.insertAdjacentHTML('beforeend', markupMovieCard);
+    modal.insertAdjacentHTML('beforeend', modalCardTpl(movieCard));
+    toggleIsOpenClass(e);
   } catch (error) {
     console.log(error);
   }
@@ -25,20 +24,22 @@ async function fetchMovieInfo() {
 
 function onModalOpen(e) {
   e.preventDefault();
-  const isFilmCardLiEl = e.target.parentNode.classList.contains('gallery__list-link');
 
+  const isFilmCardLiEl = e.target.parentNode.classList.contains('gallery__list-link');
   if (!isFilmCardLiEl) {
     return;
   }
 
+  const isBackdropOpen = backdrop.classList.contains('js-backdrop-movie');
+  if (isBackdropOpen) {
+    toggleVisuallyHidden();
+  }
+
   apiItems.id = e.target.parentNode.dataset.id;
-  toggleBackdropClass(e);
   fetchMovieInfo();
   window.addEventListener('keydown', onModalClose);
-}
 
-function toggleBackdropClass() {
-  backdrop.classList.toggle('is-open');
+  disableBodyScroll(modal);
 }
 
 function onModalClose(e) {
@@ -47,12 +48,23 @@ function onModalClose(e) {
   const isCloseEscBtn = e.code === 'Escape';
 
   if (isCloseOverlay || isCloseEscBtn || isCloseBtn) {
-    toggleBackdropClass(e);
+    toggleIsOpenClass(e);
     clearMovieCard();
+    toggleVisuallyHidden();
     window.removeEventListener('keydown', onModalClose);
   }
+
+  enableBodyScroll(modal);
+}
+
+function toggleIsOpenClass() {
+  backdrop.classList.toggle('is-open');
 }
 
 function clearMovieCard() {
   modal.innerHTML = '';
+}
+
+function toggleVisuallyHidden() {
+  mybutton.classList.toggle('visually-hidden');
 }

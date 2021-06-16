@@ -43,7 +43,7 @@ img {
 }
 
 a {
-  transition: color 250ms var(--transition-timing-function);
+  transition: color var(--transition-duration) var(--transition-timing-function);
 }
 
 a:hover,

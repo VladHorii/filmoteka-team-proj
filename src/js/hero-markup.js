@@ -43,18 +43,6 @@ function getGenre(genre) {
   });
 }
 
-function cutGenresList(array) {
-  return array
-    .map(genre => genre.name)
-    .slice(0, 3)
-    .flat();
-}
-
-// function yearOfDate(obj) {
-//   return obj.release_date ? obj.release_date.split('-')[0] : '';
-// }
-
-//=======================
 // function fetchGender
 
 // function cutDate(data) {
