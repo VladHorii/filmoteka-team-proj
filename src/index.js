@@ -1,5 +1,5 @@
 import './sass/main.scss';
-import './js/toggleHeader';
+import './js/components/toggleHeader';
 import './js/theme-switch';
 import './js/movie-service';
 import './js/registration-form';

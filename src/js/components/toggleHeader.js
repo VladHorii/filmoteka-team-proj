@@ -23,7 +23,7 @@ class CurrentPage {
     }
   }
   libraryBtn() {
-    OnLibraryBtnClassList();
+    onLibraryBtnClassList();
   }
 }
 const currentPage = new CurrentPage();
@@ -35,14 +35,14 @@ function onHomeBtnClassList() {
   refs.libraryBtnContainer.classList.remove('btn-flex');
   refs.header.classList.remove('header-library');
 }
-function OnLibraryBtnClassList() {
+function onLibraryBtnClassList() {
   refs.onLibraryBtn.classList.add('is-current');
   refs.inputContainer.classList.add('is-hidden');
   refs.libraryBtnContainer.classList.remove('is-hidden');
   refs.libraryBtnContainer.classList.add('btn-flex');
   refs.onHomeBtn.classList.remove('is-current');
   refs.header.classList.add('header-library');
-  QueueBtnClick();
+  queueBtnClick();
 }
 refs.onHomeBtn.addEventListener('click', currentPage.homeBtn);
 refs.onLibraryBtn.addEventListener('click', currentPage.libraryBtn);
@@ -55,9 +55,9 @@ function WatchedBtnClick() {
     refs.onWatchedBtn.classList.add('current-btn');
   }
 }
-function QueueBtnClick() {
+function queueBtnClick() {
   refs.onQueueBtn.classList.add('current-btn');
   refs.onWatchedBtn.classList.remove('current-btn');
 }
 refs.onWatchedBtn.addEventListener('click', WatchedBtnClick);
-refs.onQueueBtn.addEventListener('click', QueueBtnClick);
+refs.onQueueBtn.addEventListener('click', queueBtnClick);
