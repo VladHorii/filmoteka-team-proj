@@ -7,7 +7,7 @@ import './js/registration-form';
 import './js/api/api-movie-service';
 import './js/markup/hero-markup';
 import './js/students-modal';
-import './js/pagination';
+import './js/components/pagination';
 import './js/spinner';
 import './js/components/theme-switch';
 import './js/scroll-top-btn';
