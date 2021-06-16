@@ -5,9 +5,14 @@ import cardMarkupTpl from '../../templates/movie-list.hbs';
 const cardMarkup = document.querySelector('.gallery__list');
 const movieService = new MovieService();
 
-async function markupMovies() {
-  const movieData = await movieService.fetchMovies().then(r => r.results);
-  const genreData = await movieService.fetchGenre().then(r => r.genres);
+export async function markupMovies(movieData = {}) {
+  const responseGenre = await movieService.fetchGenre();
+  const genreData = await responseGenre.genres;
+
+  if (Object.keys(movieData).length === 0) {
+    const responseMovie = await movieService.fetchMovies();
+    movieData = await responseMovie.results;
+  }
 
   movieData.forEach(film => {
     const dateOfRelease = film.release_date || film.first_air_date || 'unknown date';
@@ -27,6 +32,7 @@ async function markupMovies() {
       relDate: dateOfRelease.split('-')[0],
       genres,
     };
+
     makeMarkup(card);
   });
 }
