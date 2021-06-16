@@ -5,31 +5,37 @@ import { markupMovies } from '../markup/hero-markup';
 const refs = {
   searchForm: document.querySelector('.js-search-form'),
   moviesContainer: document.querySelector('.js-movies-container'),
-  // errorForm: document.querySelector('.visually-hidden'),
+  errorForm: document.querySelector('.header-notification'),
 };
-// const keywordApiSearch = new KeywordApiSearch();
+
 const movieService = new MovieService();
 
 refs.searchForm.addEventListener('submit', onSearch);
 
 function onSearch(e) {
   e.preventDefault();
+  if (!refs.errorForm.classList.contains('visually-hidden')) {
+    refs.errorForm.classList.add('visually-hidden');
+  }
 
   movieService.query = e.currentTarget.elements.query.value;
   if (movieService.query === '') {
-    return alert('Введи запрос');
+    return refs.errorForm.classList.remove('visually-hidden');
   }
   movieService.resetPage();
 
-  movieService.fetchMoviesWithQuery().then(results => {
-    clearMoviesContainer();
-    markupMovies(results);
-
-    // if (keywordApiSearch.fetchMovies() == 0) {
-    //     return errorForm;
-
-    // }
-  });
+  movieService
+    .fetchMoviesWithQuery()
+    .then(results => {
+      if (results.length === 0) {
+        throw new Error('Movie not found');
+      }
+      clearMoviesContainer();
+      markupMovies(results);
+    })
+    .catch(error => {
+      return refs.errorForm.classList.remove('visually-hidden');
+    });
 }
 
 function clearMoviesContainer() {
