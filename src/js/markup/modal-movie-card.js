@@ -2,7 +2,7 @@ import { MovieService } from '../api/api-movie-service';
 import modalCardTpl from '../../templates/modal-card.hbs';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
-import { AddToDataBase } from './components/add-to-base';
+import { AddToDataBase } from '../components/add-to-base';
 
 const addToDataBase = new AddToDataBase();
 
