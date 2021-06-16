@@ -44,7 +44,7 @@ document.querySelector('.modal-form__signup').addEventListener('submit', e => {
   }
   if (data.pass.length < 5) {
     return (document.querySelector('.modal-form__status').textContent =
-      'Парол должен содержать более 5-и символов');
+      'Пароль должен содержать более 5-и символов');
   }
   if (data.name.length < 3) {
     return (document.querySelector('.modal-form__status').textContent =

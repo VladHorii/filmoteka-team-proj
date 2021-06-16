@@ -17,7 +17,22 @@ export async function markupMovies(movieData = {}) {
   movieData.forEach(film => {
     const dateOfRelease = film.release_date || film.first_air_date || 'unknown date';
 
-    let genres = film.genre_ids.map(genre => genreData.find(g => g.id === genre).name);
+    let genres = film.genres
+      ? film.genres.map(genre => genre.name)
+      : film.genre_ids.map(genre => genreData.find(g => g.id === genre).name);
+
+    // if (film.genres) {
+    //   genres = film.genres;
+    // } else {
+    //   genres = film.genre_ids.map(genre => genreData.find(g => g.id === genre).name);
+    // }
+
+    // let genres = film.genre_ids.map(genre => {
+    //   if (gotGenres) {
+    //     return genre.name;
+    //   }
+    //   return genreData.find(g => g.id === genre).name;
+    // });
 
     if (genres.length > 2) {
       genres = genres.slice(0, 2);

@@ -2,6 +2,10 @@ import { MovieService } from '../api/api-movie-service';
 import modalCardTpl from '../../templates/modal-card.hbs';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
+import Authorization from '../auth';
+
+const auth = new Authorization();
+
 import { AddToDataBase } from '../components/add-to-base';
 
 import { defaults, success, error } from '@pnotify/core';
@@ -44,16 +48,36 @@ function addRemoveFilm(folder, isExits, filmID) {
   }
 }
 
+function closeModalWithCard() {
+  toggleIsOpenClass();
+  clearMovieCard();
+  toggleVisuallyHidden();
+  window.removeEventListener('keydown', onModalClose);
+}
+
+function openAuthModal() {
+  closeModalWithCard();
+  document.querySelector('[data-modal]').classList.toggle('backdrop--hidden');
+}
+
 async function fetchMovieInfo(e) {
   try {
     const movieCard = await apiItems.fetchMovieInfo();
     modal.insertAdjacentHTML('beforeend', modalCardTpl(movieCard));
     toggleIsOpenClass(e);
 
-    const filmID = movieCard.id;
+    const isAuth = auth.getUserID();
 
     const btnWatchedRef = document.querySelector('.modal-button-watched');
     const btnQueueRef = document.querySelector('.modal-button-queue');
+
+    if (!isAuth) {
+      btnWatchedRef.addEventListener('click', openAuthModal);
+      btnQueueRef.addEventListener('click', openAuthModal);
+      return;
+    }
+
+    const filmID = movieCard.id;
 
     let isExitsInWatched = await addToDataBase.isExits('watched', filmID);
     let isExitsInQueue = await addToDataBase.isExits('queue', filmID);
@@ -75,7 +99,6 @@ async function fetchMovieInfo(e) {
       updateButton(isExitsInQueue, btnQueueRef, 'queue');
     });
   } catch (err) {
-    console.log(err);
     error({
       text: err,
     });
@@ -122,10 +145,7 @@ function onModalClose(e) {
   const isCloseEscBtn = e.code === 'Escape';
 
   if (isCloseOverlay || isCloseEscBtn || isCloseBtn) {
-    toggleIsOpenClass(e);
-    clearMovieCard();
-    toggleVisuallyHidden();
-    window.removeEventListener('keydown', onModalClose);
+    closeModalWithCard();
   }
 
   enableBodyScroll(modal);
