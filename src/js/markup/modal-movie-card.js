@@ -4,6 +4,15 @@ import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 import { AddToDataBase } from '../components/add-to-base';
 
+import { defaults, success, error } from '@pnotify/core';
+import '@pnotify/core/dist/PNotify.css';
+import '@pnotify/core/dist/Material.css';
+
+defaults.delay = 4000;
+defaults.styling = 'material';
+defaults.icons = 'material';
+// let notice = null;
+
 const addToDataBase = new AddToDataBase();
 
 const apiItems = new MovieService();
@@ -15,34 +24,77 @@ const backdrop = document.querySelector('.js-backdrop-movie');
 cards.addEventListener('click', onModalOpen);
 backdrop.addEventListener('click', onModalClose);
 
+function updateButton(isExits, btnRef, btnName) {
+  btnRef.textContent = isExits ? `Remove from ${btnName}` : `Add to ${btnName}`;
+}
+
+function addRemoveFilm(folder, isExits, filmID) {
+  if (isExits) {
+    addToDataBase.removeFrom(folder, filmID);
+
+    success({
+      text: `Фильм удалён из списка <${folder}>`,
+    });
+  } else {
+    addToDataBase.addFilm(folder, filmID);
+
+    success({
+      text: `Фильм добавлен в список <${folder}>`,
+    });
+  }
+}
+
 async function fetchMovieInfo(e) {
   try {
     const movieCard = await apiItems.fetchMovieInfo();
     modal.insertAdjacentHTML('beforeend', modalCardTpl(movieCard));
     toggleIsOpenClass(e);
 
-    document.querySelector('.modal-button-watched').addEventListener('click', e => {
-      const filmID = e.currentTarget.dataset.id;
-      addToDataBase
-        .addToWatched(filmID)
-        .then(r => console.log('Фильм добавлен'))
-        .catch(error => {
-          console.log(error.message);
-        });
+    const filmID = movieCard.id;
+
+    const btnWatchedRef = document.querySelector('.modal-button-watched');
+    const btnQueueRef = document.querySelector('.modal-button-queue');
+
+    let isExitsInWatched = await addToDataBase.isExits('watched', filmID);
+    let isExitsInQueue = await addToDataBase.isExits('queue', filmID);
+
+    updateButton(isExitsInWatched, btnWatchedRef, 'watched');
+    updateButton(isExitsInQueue, btnQueueRef, 'queue');
+
+    btnWatchedRef.addEventListener('click', e => {
+      addRemoveFilm('watched', isExitsInWatched, filmID);
+
+      isExitsInWatched = !isExitsInWatched;
+      updateButton(isExitsInWatched, btnWatchedRef, 'watched');
     });
-    document.querySelector('.modal-button-queue').addEventListener('click', e => {
-      const filmID = e.currentTarget.dataset.id;
-      addToDataBase
-        .addToQueue(filmID)
-        .then(r => console.log('Фильм добавлен'))
-        .catch(error => {
-          console.log(error.message);
-        });
+
+    btnQueueRef.addEventListener('click', e => {
+      addRemoveFilm('queue', isExitsInQueue, filmID);
+
+      isExitsInQueue = !isExitsInQueue;
+      updateButton(isExitsInQueue, btnQueueRef, 'queue');
     });
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
+    error({
+      text: err,
+    });
   }
 }
+
+// function notification(response) {
+//   response
+//     .then(r => {
+//       success({
+//         text: 'Фильм добавлен в список <просмотренных>',
+//       });
+//     })
+//     .catch(er => {
+//       error({
+//         text: er,
+//       });
+//     });
+// }
 
 function onModalOpen(e) {
   e.preventDefault();
