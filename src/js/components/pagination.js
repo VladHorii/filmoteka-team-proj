@@ -1,15 +1,10 @@
-import { MovieService } from './api-movie-service';
-import { getGenre, makeMarkup } from './hero-markup';
+import { MovieService } from '../api/api-movie-service';
+import { markupMovies } from '../markup/hero-markup';
 const ulTag = document.querySelector('.pagination__list');
-const galleryWrapper = document.querySelector('.gallery__list');
+const cardMarkup = document.querySelector('.gallery__list');
+const logo = document.querySelector('.header-logo-link');
+const home = document.querySelector('.js-home');
 const movieService = new MovieService();
-
-async function markupMovies() {
-  const movieData = await movieService.fetchMovies().then(r => r.results);
-  const genreData = await movieService.fetchGenre().then(r => r.genres);
-  makeMarkup(movieData, genreData);
-  getGenre(genreData);
-}
 
 movieService.fetchMovies().then(data => {
   let totalPages = data.total_pages;
@@ -18,14 +13,25 @@ movieService.fetchMovies().then(data => {
 
   window.addEventListener('resize', onPagination);
   ulTag.addEventListener('click', onPages);
+  logo.addEventListener('click', onResetPage);
+  home.addEventListener('click', onResetPage);
+
+  function onResetPage(e) {
+    movieService.page = 1;
+    cardMarkup.innerHTML = '';
+    onPagination();
+    markupMovies();
+  }
 
   function onPages(e) {
     let pageN = +e.target.dataset.number;
 
-    function makeNewPage() {
+    async function makeNewPage() {
       movieService.page = pageN;
-      galleryWrapper.innerHTML = '';
-      markupMovies();
+      cardMarkup.innerHTML = '';
+      const response = await movieService.fetchMovies();
+
+      markupMovies(response.results);
     }
 
     if (e.target.classList.contains('btn-next')) {
@@ -136,7 +142,7 @@ function paginationTabDesk(totalPages, page) {
   if (page > 1) {
     liTag += `<li class="btn-arrow btn-prev" data-number="${
       page - 1
-    }" onclick="paginationTabDesk(totalPages, ${page - 1})">	
+    }" onclick="paginationTabDesk(totalPages, ${page - 1})">
     	&#10094;</li>`;
   }
 
@@ -221,7 +227,7 @@ function paginationTabDesk(totalPages, page) {
   if (page < totalPages) {
     liTag += `<li class="btn-arrow btn-next" data-number="${
       page + 1
-    }" onclick="paginationTabDesk(totalPages, ${page + 1})">	
+    }" onclick="paginationTabDesk(totalPages, ${page + 1})">
     &#10095;</li>`;
   }
 

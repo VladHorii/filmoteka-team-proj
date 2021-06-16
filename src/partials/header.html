@@ -41,8 +41,8 @@
 
       <!-- <div class="header-menu"> -->
       <ul class="header-navigation-list" id="page-nav">
-        <li class="header-navigation-item">
-          <a id="btn-home" class="header-navigation-page link-nav" href="#home" data-link>home</a>
+        <li class="header-navigation-item js-home">
+          <a class="header-navigation-page link-nav" id="btn-home" href="#home" data-link>home</a>
         </li>
         <li class="header-navigation-item visually-hidden">
           <a
@@ -64,14 +64,14 @@
       <!-- </div> -->
     </nav>
 
-    <form class="header-search-form" id="search-form">
+    <form class="header-search-form js-search-form" id="search-form">
       <input
         id="serch-input"
         class="header-search-field"
         type="text"
         name="query"
         autocomplete="off"
-        placeholder="Поиск фильмов"
+        placeholder="Search Movies"
       />
       <svg class="header-search-icon">
         <use href="./images/sprite.svg#icon-header-search"></use>
