@@ -1,7 +1,6 @@
-import { MovieService } from '../api-movie-service';
+import { MovieService } from '../api/api-movie-service';
 import modalCardTpl from '../../templates/modal-card.hbs';
-import { disableBodyScroll } from 'body-scroll-lock';
-import { enableBodyScroll } from 'body-scroll-lock';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 const apiItems = new MovieService();
 
