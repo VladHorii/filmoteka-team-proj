@@ -1,4 +1,4 @@
-import { MovieService } from './api-movie-service';
+import { MovieService } from './api/api-movie-service';
 import modalCardTpl from '../templates/modal-card.hbs';
 
 const apiItems = new MovieService();
