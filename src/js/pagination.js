@@ -2,11 +2,9 @@ import { MovieService } from './api/api-movie-service';
 import cardMarkupTpl from '../templates/movie-list.hbs';
 const ulTag = document.querySelector('.pagination__list');
 const galleryWrapper = document.querySelector('.gallery__list');
+const logo = document.querySelector('.header-logo-link');
+const pagNumber = document.querySelector('.number');
 const movieService = new MovieService();
-
-function makeMarkup(movies, genres) {
-  galleryWrapper.insertAdjacentHTML('beforeend', cardMarkupTpl({ movies }, { genres }));
-}
 
 async function markupMovies() {
   const movieData = await movieService.fetchMovies().then(r => r.results);
@@ -15,49 +13,43 @@ async function markupMovies() {
   getGenre(genreData);
 }
 
-function getGenre(genre) {
-  genre.forEach(e => {
-    const movieGenre = document.querySelectorAll('.gallery-title-block__item');
-    movieGenre.forEach(genreName => {
-      if (Number(genreName.textContent) === e.id) {
-        genreName.textContent = e.name;
-      }
-    });
-  });
-}
-
 movieService.fetchMovies().then(data => {
   let totalPages = data.total_pages;
   let page = data.page;
   window.totalPages = totalPages;
 
+  window.addEventListener('resize', onPagination);
   ulTag.addEventListener('click', onPages);
+  logo.addEventListener('click', onResetPage);
+
+  function onResetPage(e) {
+    movieService.page = 1;
+    galleryWrapper.innerHTML = '';
+    onPagination();
+    markupMovies();
+  }
 
   function onPages(e) {
     let pageN = +e.target.dataset.number;
 
-    if (e.target.classList.contains('btn-next')) {
-      movieService.nextPage();
-      movieService.page = pageN;
-      galleryWrapper.innerHTML = '';
-      markupMovies();
-    } else if (e.target.classList.contains('btn-prev')) {
-      movieService.previousPage();
-      movieService.page = pageN;
-      galleryWrapper.innerHTML = '';
-      markupMovies();
-    } else if (e.target.classList.contains('number')) {
+    function makeNewPage() {
       movieService.page = pageN;
       galleryWrapper.innerHTML = '';
       markupMovies();
     }
+
+    if (e.target.classList.contains('btn-next')) {
+      movieService.nextPage();
+      makeNewPage();
+    } else if (e.target.classList.contains('btn-prev')) {
+      movieService.previousPage();
+      makeNewPage();
+    } else if (e.target.classList.contains('number')) {
+      makeNewPage();
+    }
   }
 
-  if (window.matchMedia('(max-width: 367px)').matches) {
-    paginationMobile(totalPages, page);
-  } else {
-    paginationTabDesk(totalPages, page);
-  }
+  onPagination();
 
   function onPagination() {
     if (window.matchMedia('(max-width: 367px)').matches) {
@@ -66,8 +58,6 @@ movieService.fetchMovies().then(data => {
       paginationTabDesk(totalPages, page);
     }
   }
-
-  window.addEventListener('resize', onPagination);
 });
 
 function paginationMobile(totalPages, page) {

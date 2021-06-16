@@ -8,6 +8,7 @@ export class MovieService {
     this.page = 1;
     this.id = '';
     this.key = '0558fb418099b1d6ef291e53504aa0aa';
+    this.id = '';
   }
 
   async fetchMovies() {
@@ -23,8 +24,7 @@ export class MovieService {
   async fetchMovieInfo() {
     try {
       const response = await axios.get(`/movie/${this.id}?api_key=${this.key}&language=en-US`);
-      const movieInfo = response.data;
-      return movieInfo;
+      return response.data;
     } catch (error) {
       console.log(error);
     }

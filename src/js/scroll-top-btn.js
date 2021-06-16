@@ -1,7 +1,7 @@
 // import smoothscroll from 'smoothscroll-polyfill';
 // smoothscroll.polyfill();
 
-mybutton = document.getElementById('scrollTopBtn');
+mybutton = document.getElementById('scroll-top-btn');
 
 mybutton.addEventListener('click', topFunction);
 

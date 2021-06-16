@@ -20,11 +20,12 @@
 @import './layout/index/hero';
 
 @import './spinner';
-@import './theme-switch';
 // components
-@import './components/scrollTopBtn';
+@import './components/scroll-top-btn';
 @import './components/button';
 @import './components/pagination';
 @import './components/modal-movie-card';
+@import './components/button-modal';
+@import './components/theme-switch';
 //utils
 @import './utils/variables';

@@ -1,15 +1,13 @@
-const headerEl = document.getElementById('page-header');
-const navMenuEl = headerEl.querySelector(`.nav`);
+import { currentLinkNavClass, headerLibraryClass, headerHomeClass } from './constants';
 
-const REFS = {
-  HEADER: document.getElementById('page-header'),
-  NAV_MENU: document.getElementById('page-nav'),
-  NAV_LINKS: document.querySelectorAll('.header-navigation-page'),
+const refs = {
+  header: document.getElementById('page-header'),
+  navMenu: document.getElementById('page-nav'),
+  navLinks: document.querySelectorAll('.link-nav'),
 };
-
-REFS.HEADER.addEventListener('click', e => {
+refs.header.addEventListener('click', e => {
   const target = e.target;
-  const targetParent = target.closest('.header-logo-link');
+  const targetParent = target.closest('.logo');
 
   if (target.dataset.link === '' || targetParent) {
     e.preventDefault();
@@ -17,16 +15,14 @@ REFS.HEADER.addEventListener('click', e => {
     const link = targetParent || target;
     const path = link.href.split('#')[1];
 
-    REFS.NAV_LINKS.forEach(link => link.classList.remove('is-current'));
+    refs.navLinks.forEach(link => link.classList.remove(currentLinkNavClass));
 
-    REFS.NAV_MENU.querySelector(`[href='#${path}']`).classList.add(`is-current`);
+    refs.navMenu.querySelector(`[href='#${path}']`).classList.add(currentLinkNavClass);
 
     if (path === 'home') {
-      e.currentTarget.classList.remove(`header-library`);
-      e.currentTarget.classList.add(`header-${path}`);
-    } else if (path === 'library') {
-      e.currentTarget.classList.remove(`header-home`);
-      e.currentTarget.classList.add(`header-${path}`);
+      refs.header.classList.replace(headerLibraryClass, headerHomeClass);
+    } else {
+      refs.header.classList.replace(headerHomeClass, headerLibraryClass);
     }
   }
 });
