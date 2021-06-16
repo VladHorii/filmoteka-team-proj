@@ -1,11 +1,21 @@
 import { MovieService } from '../api/api-movie-service';
 import { markupMovies } from '../markup/hero-markup';
+//import { onSearch } from 'keyword-search';
 const ulTag = document.querySelector('.pagination__list');
 const cardMarkup = document.querySelector('.gallery__list');
 const logo = document.querySelector('.header-logo-link');
 const home = document.querySelector('.js-home');
 const library = document.querySelector('.js-my-library-btn');
+const searchForm = document.querySelector('.js-search-form');
 const movieService = new MovieService();
+
+searchForm.addEventListener('submit', onSearchP);
+
+/*function onSearchP() {
+  movieService.fetchMoviesWithQuery().then(r => console.log(r.total_pages));
+  
+  console.log(1);
+}*/
 
 movieService.fetchMovies().then(data => {
   let totalPages = data.total_pages;
@@ -17,6 +27,7 @@ movieService.fetchMovies().then(data => {
   logo.addEventListener('click', onResetPage);
   home.addEventListener('click', onResetPage);
   library.addEventListener('click', onHidePagination);
+  // searchForm.addEventListener('submit', onSearch);
 
   function onHidePagination() {
     ulTag.classList.add('visually-hidden');

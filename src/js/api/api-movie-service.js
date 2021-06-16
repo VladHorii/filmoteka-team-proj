@@ -34,7 +34,7 @@ export class MovieService {
       const response = await axios.get(
         `/search/movie/?api_key=${this.key}&query=${this.searchQuery}&page=${this.page}&language=en-US`,
       );
-      return response.data.results;
+      return response.data;
     } catch (error) {
       console.log(error);
     }

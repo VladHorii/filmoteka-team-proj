@@ -12,7 +12,7 @@ const movieService = new MovieService();
 
 refs.searchForm.addEventListener('submit', onSearch);
 
-function onSearch(e) {
+export function onSearch(e) {
   e.preventDefault();
   if (!refs.errorForm.classList.contains('visually-hidden')) {
     refs.errorForm.classList.add('visually-hidden');
@@ -27,11 +27,12 @@ function onSearch(e) {
   movieService
     .fetchMoviesWithQuery()
     .then(results => {
-      if (results.length === 0) {
+      console.log(results);
+      if (results.results.length === 0) {
         throw new Error('Movie not found');
       }
       clearMoviesContainer();
-      markupMovies(results);
+      markupMovies(results.results);
     })
     .catch(error => {
       return refs.errorForm.classList.remove('visually-hidden');
