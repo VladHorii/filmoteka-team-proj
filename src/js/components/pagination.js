@@ -1,5 +1,5 @@
-import { MovieService } from './api/api-movie-service';
-import { markupMovies } from './markup/hero-markup';
+import { MovieService } from '../api/api-movie-service';
+import { markupMovies } from '../markup/hero-markup';
 const ulTag = document.querySelector('.pagination__list');
 const cardMarkup = document.querySelector('.gallery__list');
 const logo = document.querySelector('.header-logo-link');
