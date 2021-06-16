@@ -37,7 +37,7 @@
   &:hover {
     color: #ffffff;
     background-color: #ff6b01;
-    border: none;
+    border-color: transparent;
     box-shadow: 0 0 5px rgba(255, 245, 245, 0.8);
   }
   &:hover::before {
