@@ -1,12 +1,7 @@
 import { currentLinkNavClass, headerLibraryClass, headerHomeClass } from './constants';
-import { markupMovies } from './markup/hero-markup';
-import { MovieService } from './api/api-movie-service';
-import { AddToDataBase } from './components/add-to-base';
 
-import cardMarkupTpl from '../templates/movie-list.hbs';
-
-const movieService = new MovieService();
-const addToDataBase = new AddToDataBase();
+import { setWatchedAndQueueMarkup, setMarkup } from './components/my-library';
+// import { markupMovies } from './markup/hero-markup';
 
 const refs = {
   header: document.getElementById('page-header'),
@@ -32,28 +27,13 @@ refs.header.addEventListener('click', async e => {
       markupMovies();
     } else {
       refs.header.classList.replace(headerHomeClass, headerLibraryClass);
-
-      const list = new Set();
-
-      document.querySelector('.gallery__list').textContent = '';
-
-      const watchedList = await addToDataBase.getList('watched');
-      const queueList = await addToDataBase.getList('queue');
-
-      for (const key in watchedList) {
-        list.add(watchedList[key]);
-      }
-      for (const key in queueList) {
-        list.add(queueList[key]);
-      }
-
-      const movies = [];
-      list.forEach(async element => {
-        movieService.id = element;
-        const film = await movieService.fetchMovieInfo();
-        movies.push(film);
-      });
-      markupMovies(movies, true);
+      setWatchedAndQueueMarkup();
     }
   }
+});
+document.querySelector('.js-get-watched').addEventListener('click', e => {
+  setMarkup('watched');
+});
+document.querySelector('.js-get-queue').addEventListener('click', e => {
+  setMarkup('queue');
 });
