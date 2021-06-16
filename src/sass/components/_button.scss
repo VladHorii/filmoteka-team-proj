@@ -1,5 +1,6 @@
 .btn {
   @include button-reset();
+  display: block;
   font-weight: 500;
   font-size: 12px;
   line-height: 1.132;
@@ -58,9 +59,11 @@
     }
   }
 }
-.btn-flex {
+
+.library-container.display-none {
+  display: none;
+}
+.library-container.btn-flex {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
-  opacity: 1;
 }
