@@ -53,7 +53,7 @@ refs.header.addEventListener('click', async e => {
         const film = await movieService.fetchMovieInfo();
         movies.push(film);
       });
-      markupMovies(movies);
+      markupMovies(movies, true);
     }
   }
 });

@@ -5,7 +5,7 @@ import cardMarkupTpl from '../../templates/movie-list.hbs';
 const cardMarkup = document.querySelector('.gallery__list');
 const movieService = new MovieService();
 
-export async function markupMovies(movieData = {}) {
+export async function markupMovies(movieData = {}, vote = false) {
   const responseGenre = await movieService.fetchGenre();
   const genreData = await responseGenre.genres;
 
@@ -21,19 +21,6 @@ export async function markupMovies(movieData = {}) {
       ? film.genres.map(genre => genre.name)
       : film.genre_ids.map(genre => genreData.find(g => g.id === genre).name);
 
-    // if (film.genres) {
-    //   genres = film.genres;
-    // } else {
-    //   genres = film.genre_ids.map(genre => genreData.find(g => g.id === genre).name);
-    // }
-
-    // let genres = film.genre_ids.map(genre => {
-    //   if (gotGenres) {
-    //     return genre.name;
-    //   }
-    //   return genreData.find(g => g.id === genre).name;
-    // });
-
     if (genres.length > 2) {
       genres = genres.slice(0, 2);
       genres.push('Other');
@@ -47,6 +34,9 @@ export async function markupMovies(movieData = {}) {
       relDate: dateOfRelease.split('-')[0],
       genres,
     };
+    if (vote) {
+      card.vote = film.vote_average.toFixed(1);
+    }
 
     makeMarkup(card);
   });
