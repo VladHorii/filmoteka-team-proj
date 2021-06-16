@@ -1,17 +1,9 @@
-import { MovieService } from './api/api-movie-service';
-import cardMarkupTpl from '../templates/movie-list.hbs';
+import { MovieService } from '../api/api-movie-service';
+import { markupMovies } from '../markup/hero-markup';
 const ulTag = document.querySelector('.pagination__list');
-const galleryWrapper = document.querySelector('.gallery__list');
+const cardMarkup = document.querySelector('.gallery__list');
 const logo = document.querySelector('.header-logo-link');
-const pagNumber = document.querySelector('.number');
 const movieService = new MovieService();
-
-async function markupMovies() {
-  const movieData = await movieService.fetchMovies().then(r => r.results);
-  const genreData = await movieService.fetchGenre().then(r => r.genres);
-  makeMarkup(movieData, genreData);
-  getGenre(genreData);
-}
 
 movieService.fetchMovies().then(data => {
   let totalPages = data.total_pages;
@@ -24,7 +16,7 @@ movieService.fetchMovies().then(data => {
 
   function onResetPage(e) {
     movieService.page = 1;
-    galleryWrapper.innerHTML = '';
+    cardMarkup.innerHTML = '';
     onPagination();
     markupMovies();
   }
@@ -32,10 +24,12 @@ movieService.fetchMovies().then(data => {
   function onPages(e) {
     let pageN = +e.target.dataset.number;
 
-    function makeNewPage() {
+    async function makeNewPage() {
       movieService.page = pageN;
-      galleryWrapper.innerHTML = '';
-      markupMovies();
+      cardMarkup.innerHTML = '';
+      const response = await movieService.fetchMovies();
+
+      markupMovies(response.results);
     }
 
     if (e.target.classList.contains('btn-next')) {

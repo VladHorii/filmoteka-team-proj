@@ -51,6 +51,10 @@ export class MovieService {
     this.page = 1;
   }
 
+  setPage(page) {
+    this.page = page;
+  }
+
   get query() {
     return this.searchQuery;
   }
