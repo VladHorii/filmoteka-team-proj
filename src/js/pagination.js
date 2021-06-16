@@ -1,5 +1,5 @@
-import { MovieService } from './api-movie-service';
-import { getGenre, makeMarkup } from './hero-markup';
+import { MovieService } from './api/api-movie-service';
+import cardMarkupTpl from '../templates/movie-list.hbs';
 const ulTag = document.querySelector('.pagination__list');
 const galleryWrapper = document.querySelector('.gallery__list');
 const logo = document.querySelector('.header-logo-link');
@@ -146,7 +146,7 @@ function paginationTabDesk(totalPages, page) {
   if (page > 1) {
     liTag += `<li class="btn-arrow btn-prev" data-number="${
       page - 1
-    }" onclick="paginationTabDesk(totalPages, ${page - 1})">	
+    }" onclick="paginationTabDesk(totalPages, ${page - 1})">
     	&#10094;</li>`;
   }
 
@@ -231,7 +231,7 @@ function paginationTabDesk(totalPages, page) {
   if (page < totalPages) {
     liTag += `<li class="btn-arrow btn-next" data-number="${
       page + 1
-    }" onclick="paginationTabDesk(totalPages, ${page + 1})">	
+    }" onclick="paginationTabDesk(totalPages, ${page + 1})">
     &#10095;</li>`;
   }
 

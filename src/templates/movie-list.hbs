@@ -1,39 +1,32 @@
-{{#each movies}}
-  <li class='gallery__list-item' data-aos='zoom-in'>
-    <a class='gallery__list-link' href='' data-id={{id}}>
-      <img class='card_img' src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt="{{title}}" />
-    </a>
-    <div class='gallery-title-block'>
-      <h2 class='gallery-title-block__title'>
-        {{title}}{{name}}
-      </h2>
-      <div class='gallery-title-block__info'>
-        <ul class='gallery-title-block__list'>
-          {{#each genre_ids}}
-            <li class='gallery-title-block__item'>
-              {{this}}
-            </li>
-            <li class='gallery-title-block__coma'>
-              {{#unless @last}}
-                ,
-              {{/unless}}
-            </li>
-          {{/each}}
-        </ul>
+<li class='gallery__list-item' data-aos='zoom-in'>
+  <a class='gallery__list-link' href='' data-id={{this.id}}>
+    {{#if this.posterPath}}
+      <img
+        class='card_img'
+        src='https://image.tmdb.org/t/p/w500{{this.posterPath}}'
+        alt='{{this.title}}'
+        width='274'
+        height='398'
+      />
+    {{else}}
+      <p class='gallery__list-noimg'>Movie photo not found</p>
+    {{/if}}
 
-        {{!-- {{#each genres}}
-            <span>
-              {{name}}{{#unless @last}}
-                ,
-              {{/unless}}
-            </span>
-          {{/each}} --}}
-        |
+  </a>
+  <div class='gallery-title-block'>
+    <h2 class='gallery-title-block__title'>
+      {{this.title}}
+    </h2>
+    <div class='gallery-title-block__info'>
+      <p>{{this.genres}}</p>
 
-        <div>
-          &nbsp;{{release_date}}{{first_air_date}}
-        </div>
+      {{#if this.genres}}
+        <span class='gallery-title-block__separator'>|</span>
+      {{/if}}
+
+      <div>
+        {{this.relDate}}
       </div>
     </div>
-  </li>
-{{/each}}
+  </div>
+</li>
