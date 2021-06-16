@@ -1,7 +1,7 @@
 import { currentLinkNavClass, headerLibraryClass, headerHomeClass } from './constants';
 
 import { setWatchedAndQueueMarkup, setMarkup } from './components/my-library';
-// import { markupMovies } from './markup/hero-markup';
+import { markupMovies } from './markup/hero-markup';
 
 const refs = {
   header: document.getElementById('page-header'),
