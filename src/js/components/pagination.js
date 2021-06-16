@@ -3,6 +3,7 @@ import { markupMovies } from '../markup/hero-markup';
 const ulTag = document.querySelector('.pagination__list');
 const cardMarkup = document.querySelector('.gallery__list');
 const logo = document.querySelector('.header-logo-link');
+const home = document.querySelector('.js-home');
 const movieService = new MovieService();
 
 movieService.fetchMovies().then(data => {
@@ -13,6 +14,7 @@ movieService.fetchMovies().then(data => {
   window.addEventListener('resize', onPagination);
   ulTag.addEventListener('click', onPages);
   logo.addEventListener('click', onResetPage);
+  home.addEventListener('click', onResetPage);
 
   function onResetPage(e) {
     movieService.page = 1;
