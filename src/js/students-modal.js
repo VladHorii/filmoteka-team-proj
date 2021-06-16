@@ -15,9 +15,11 @@ function onClickStudentsModal() {
 
   if (!refs.studentsModal.classList.contains('visually-hidden')) {
     disableBodyScroll(refs.closeStudentsModal);
+    window.addEventListener('keydown', onEscKeyPress);
   }
   if (refs.studentsModal.classList.contains('visually-hidden')) {
     enableBodyScroll(refs.closeStudentsModal);
+    window.removeEventListener('keydown', onEscKeyPress);
   }
 }
 
@@ -25,6 +27,14 @@ refs.studentsModal.addEventListener('click', onBackdropClick);
 
 function onBackdropClick(event) {
   if (event.currentTarget === event.target) {
+    refs.studentsModal.classList.add('visually-hidden');
+    toggleScrollTopBtn();
+    enableBodyScroll(refs.closeStudentsModal);
+  }
+}
+
+function onEscKeyPress(event) {
+  if (event.code === 'Escape') {
     refs.studentsModal.classList.add('visually-hidden');
     toggleScrollTopBtn();
     enableBodyScroll(refs.closeStudentsModal);
