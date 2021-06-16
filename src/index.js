@@ -1,5 +1,4 @@
 import './sass/main.scss';
-import './js/constants';
 import './js/toggleHeader';
 import './js/theme-switch';
 import './js/movie-service';
