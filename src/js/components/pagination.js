@@ -4,6 +4,7 @@ const ulTag = document.querySelector('.pagination__list');
 const cardMarkup = document.querySelector('.gallery__list');
 const logo = document.querySelector('.header-logo-link');
 const home = document.querySelector('.js-home');
+const library = document.querySelector('.js-my-library-btn');
 const movieService = new MovieService();
 
 movieService.fetchMovies().then(data => {
@@ -15,12 +16,17 @@ movieService.fetchMovies().then(data => {
   ulTag.addEventListener('click', onPages);
   logo.addEventListener('click', onResetPage);
   home.addEventListener('click', onResetPage);
+  library.addEventListener('click', onHidePagination);
+
+  function onHidePagination() {
+    ulTag.classList.add('visually-hidden');
+  }
 
   function onResetPage(e) {
+    ulTag.classList.remove('visually-hidden');
     movieService.page = 1;
     cardMarkup.innerHTML = '';
     onPagination();
-    markupMovies();
   }
 
   function onPages(e) {

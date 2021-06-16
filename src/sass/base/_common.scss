@@ -27,6 +27,7 @@ p {
 
 a {
   text-decoration: none;
+  transition: color var(--transition-duration) var(--transition-timing-function);
 }
 
 ul,
@@ -40,10 +41,6 @@ img {
   display: block;
   max-width: 100%;
   // height: auto;
-}
-
-a {
-  transition: color var(--transition-duration) var(--transition-timing-function);
 }
 
 a:hover,
