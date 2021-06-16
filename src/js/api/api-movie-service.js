@@ -30,12 +30,26 @@ export class MovieService {
     }
   }
 
+  async fetchMoviesWithQuery() {
+    try {
+      const response = await axios.get(
+        `/search/movie/?api_key=${this.key}&query=${this.searchQuery}&page=${this.page}&language=en-US`,
+      );
+      return response.data.results;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   nextPage() {
     this.page += 1;
   }
 
   previousPage() {
     this.page -= 1;
+  }
+  resetPage() {
+    this.page = 1;
   }
 
   get query() {

@@ -13,3 +13,4 @@ import './js/components/theme-switch';
 import './js/scroll-top-btn';
 import './js/aos';
 import './js/markup/modal-movie-card';
+import './js/components/keyword-search';
