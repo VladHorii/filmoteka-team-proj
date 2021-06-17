@@ -1,9 +1,7 @@
 .header-library {
-  // padding-bottom: 65px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: var(--grey-900);
 
   background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
     url(../images/header-library/bg-img-mob.jpg);
@@ -12,7 +10,7 @@
     screen and (min-resolution: 192dpi),
     screen and (min-resolution: 2dppx) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-      url(../images/header-library/bg-img-desktop@2x.jpg);
+      url(../images/header-library/bg-img-mob@2x.jpg);
   }
 
   @media screen and (min-width: $desktop) {

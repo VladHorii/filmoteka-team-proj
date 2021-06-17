@@ -1,7 +1,5 @@
 import './sass/main.scss';
-import './js/body-scroll-lock';
-import './js/constants';
-import './js/toggleHeader';
+import './js/components/toggleHeader';
 import './js/movie-service';
 import './js/registration-form';
 import './js/api/api-movie-service';
