@@ -50,9 +50,12 @@ function addRemoveFilm(folder, isExits, filmID) {
 
 function closeModalWithCard() {
   toggleIsOpenClass();
-  clearMovieCard();
   toggleVisuallyHidden();
   window.removeEventListener('keydown', onModalClose);
+
+  setTimeout(() => {
+    clearMovieCard();
+  }, 250);
 }
 
 function openAuthModal() {

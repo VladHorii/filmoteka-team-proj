@@ -11,7 +11,7 @@
   pointer-events: none;
   transition-property: opacity, visibility;
   transition-duration: var(--transition-duration);
-  transition-timing-function: var(--timing-function);
+  transition-timing-function: var(--transition-timing-function);
 
   &.is-open {
     opacity: 1;
@@ -44,16 +44,15 @@
 }
 
 .modal-movie {
+  position: relative;
   width: 100%;
   max-width: 618px;
-  padding: 0;
   margin: 0 auto;
 
   transform: scale(0);
-  transform: translate(0, -150%);
   background-color: var(--secondary-text-color);
   transition-duration: var(--transition-duration);
-  transition-timing-function: var(--timing-function);
+  transition-timing-function: var(--transition-timing-function);
 
   &__card {
     @media screen and (min-width: $tablet) {
