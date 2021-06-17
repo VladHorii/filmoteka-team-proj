@@ -1,7 +1,7 @@
 // import KeywordApiSearch from './api-keyword-search';
 import { MovieService } from '../api/api-movie-service';
 import { markupMovies } from '../markup/hero-markup';
-import { paginationMobile, paginationTabDesk } from './pagination.js';
+import { paginationMobile, paginationTabDesk } from '../markup/pagination-markup';
 
 const refs = {
   searchForm: document.querySelector('.js-search-form'),
@@ -42,44 +42,27 @@ export function onSearch(e) {
 
       function onPages(e) {
         let pageN = +e.target.dataset.number;
-        console.log(e.currentTarget);
 
         async function makeNewPage() {
           movieService.page = pageN;
           refs.cardMarkup.innerHTML = '';
           const response = await movieService.fetchMoviesWithQuery();
 
-          markupMovies(response.results);
-        }
-
-        if (
-          e.target.classList.contains('btn-next') &&
-          e.currentTarget.classList.contains('pagination__list-for-key')
-        ) {
-          if (window.matchMedia('(max-width: 367px)').matches) {
-            paginationMobile(totalPages, page + 1, refs.paginationKey);
-          } else {
-            paginationTabDesk(totalPages, page + 1, refs.paginationKey);
-          }
-          movieService.nextPage();
-          makeNewPage();
-        } else if (
-          e.target.classList.contains('btn-prev') &&
-          e.currentTarget.classList.contains('pagination__list-for-key')
-        ) {
-          if (window.matchMedia('(max-width: 367px)').matches) {
-            paginationMobile(totalPages, page - 1, refs.paginationKey);
-          } else {
-            paginationTabDesk(totalPages, page - 1, refs.paginationKey);
-          }
-          movieService.previousPage();
-          makeNewPage();
-        } else if (e.target.classList.contains('number')) {
           if (window.matchMedia('(max-width: 367px)').matches) {
             paginationMobile(totalPages, pageN, refs.paginationKey);
           } else {
             paginationTabDesk(totalPages, pageN, refs.paginationKey);
           }
+          markupMovies(response.results);
+        }
+
+        if (e.target.classList.contains('btn-next')) {
+          movieService.nextPage();
+          makeNewPage();
+        } else if (e.target.classList.contains('btn-prev')) {
+          movieService.previousPage();
+          makeNewPage();
+        } else {
           makeNewPage();
         }
       }
@@ -94,8 +77,6 @@ export function onSearch(e) {
       }
 
       onPagination();
-
-      console.log(totalPages);
       clearMoviesContainer();
       markupMovies(results.results);
     })
