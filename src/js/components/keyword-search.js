@@ -1,11 +1,14 @@
 // import KeywordApiSearch from './api-keyword-search';
 import { MovieService } from '../api/api-movie-service';
 import { markupMovies } from '../markup/hero-markup';
+import { paginationMobile, paginationTabDesk } from './pagination.js';
 
 const refs = {
   searchForm: document.querySelector('.js-search-form'),
   moviesContainer: document.querySelector('.js-movies-container'),
   errorForm: document.querySelector('.header-notification'),
+  paginationKey: document.querySelector('.pagination__list-for-key'),
+  cardMarkup: document.querySelector('.gallery__list'),
 };
 
 const movieService = new MovieService();
@@ -27,10 +30,72 @@ export function onSearch(e) {
   movieService
     .fetchMoviesWithQuery()
     .then(results => {
-      console.log(results);
       if (results.results.length === 0) {
         throw new Error('Movie not found');
       }
+
+      window.addEventListener('resize', onPagination);
+      let totalPages = results.total_pages;
+      let page = results.page;
+
+      refs.paginationKey.addEventListener('click', onPages);
+
+      function onPages(e) {
+        let pageN = +e.target.dataset.number;
+        console.log(e.currentTarget);
+
+        async function makeNewPage() {
+          movieService.page = pageN;
+          refs.cardMarkup.innerHTML = '';
+          const response = await movieService.fetchMoviesWithQuery();
+
+          markupMovies(response.results);
+        }
+
+        if (
+          e.target.classList.contains('btn-next') &&
+          e.currentTarget.classList.contains('pagination__list-for-key')
+        ) {
+          if (window.matchMedia('(max-width: 367px)').matches) {
+            paginationMobile(totalPages, page + 1, refs.paginationKey);
+          } else {
+            paginationTabDesk(totalPages, page + 1, refs.paginationKey);
+          }
+          movieService.nextPage();
+          makeNewPage();
+        } else if (
+          e.target.classList.contains('btn-prev') &&
+          e.currentTarget.classList.contains('pagination__list-for-key')
+        ) {
+          if (window.matchMedia('(max-width: 367px)').matches) {
+            paginationMobile(totalPages, page - 1, refs.paginationKey);
+          } else {
+            paginationTabDesk(totalPages, page - 1, refs.paginationKey);
+          }
+          movieService.previousPage();
+          makeNewPage();
+        } else if (e.target.classList.contains('number')) {
+          if (window.matchMedia('(max-width: 367px)').matches) {
+            paginationMobile(totalPages, pageN, refs.paginationKey);
+          } else {
+            paginationTabDesk(totalPages, pageN, refs.paginationKey);
+          }
+          makeNewPage();
+        }
+      }
+
+      function onPagination() {
+        if (window.matchMedia('(max-width: 367px)').matches) {
+          console.log(refs.paginationKey);
+          paginationMobile(totalPages, page, refs.paginationKey);
+        } else {
+          paginationTabDesk(totalPages, page, refs.paginationKey);
+        }
+      }
+
+      onPagination();
+
+      console.log(totalPages);
       clearMoviesContainer();
       markupMovies(results.results);
     })
@@ -39,6 +104,6 @@ export function onSearch(e) {
     });
 }
 
-function clearMoviesContainer() {
+export function clearMoviesContainer() {
   refs.moviesContainer.innerHTML = '';
 }
