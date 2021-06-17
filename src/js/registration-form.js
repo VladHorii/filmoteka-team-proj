@@ -1,6 +1,5 @@
 import Authorization from './auth';
-import { disableBodyScroll } from 'body-scroll-lock';
-import { enableBodyScroll } from 'body-scroll-lock';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 const auth = new Authorization();
 auth.init();
