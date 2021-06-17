@@ -1,4 +1,4 @@
-class Spinner {
+export class Spinner {
   constructor(selector = '.spinner') {
     this.isOpen = false;
     this.spinnerRef = document.querySelector(selector);
