@@ -1,4 +1,4 @@
-import Authorization from './auth';
+import Authorization from '../auth';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 const auth = new Authorization();
