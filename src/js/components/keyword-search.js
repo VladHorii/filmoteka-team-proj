@@ -7,7 +7,7 @@ const refs = {
   searchForm: document.querySelector('.js-search-form'),
   moviesContainer: document.querySelector('.js-movies-container'),
   errorForm: document.querySelector('.header-notification'),
-  paginationKey: document.querySelector('.pagination__list-for-key'),
+  ulTagP: document.querySelector('.pagination__list-for-key'),
   cardMarkup: document.querySelector('.gallery__list'),
 };
 
@@ -38,7 +38,7 @@ export function onSearch(e) {
       let totalPages = results.total_pages;
       let page = results.page;
 
-      refs.paginationKey.addEventListener('click', onPages);
+      refs.ulTagP.addEventListener('click', onPages);
 
       function onPages(e) {
         let pageN = +e.target.dataset.number;
@@ -49,9 +49,9 @@ export function onSearch(e) {
           const response = await movieService.fetchMoviesWithQuery();
 
           if (window.matchMedia('(max-width: 367px)').matches) {
-            paginationMobile(totalPages, pageN, refs.paginationKey);
+            paginationMobile(totalPages, pageN, refs.ulTagP);
           } else {
-            paginationTabDesk(totalPages, pageN, refs.paginationKey);
+            paginationTabDesk(totalPages, pageN, refs.ulTagP);
           }
           markupMovies(response.results);
         }
@@ -69,9 +69,9 @@ export function onSearch(e) {
 
       function onPagination() {
         if (window.matchMedia('(max-width: 367px)').matches) {
-          paginationMobile(totalPages, page, refs.paginationKey);
+          paginationMobile(totalPages, page, refs.ulTagP);
         } else {
-          paginationTabDesk(totalPages, page, refs.paginationKey);
+          paginationTabDesk(totalPages, page, refs.ulTagP);
         }
       }
 

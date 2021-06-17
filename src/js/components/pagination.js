@@ -8,6 +8,7 @@ const refs = {
   home: document.querySelector('.js-home'),
   library: document.querySelector('.js-my-library-btn'),
   searchForm: document.querySelector('.js-search-form'),
+  ulTagP: document.querySelector('.pagination__list-for-key'),
 };
 
 const movieService = new MovieService();
@@ -31,6 +32,7 @@ movieService.fetchMovies().then(data => {
 
   function onHidePagination() {
     refs.ulTag.classList.add('visually-hidden');
+    refs.ulTagP.classList.add('visually-hidden');
   }
 
   function onResetPage(e) {
