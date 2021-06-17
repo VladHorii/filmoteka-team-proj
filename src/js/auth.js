@@ -8,7 +8,7 @@ export default class Authorization {
   constructor() {
     this.user = {};
     this.isAuth = false;
-    this.init();
+    // this.init();
   }
 
   getUserID() {
