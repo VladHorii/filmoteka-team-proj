@@ -1,18 +1,21 @@
 import { MovieService } from '../api/api-movie-service';
 import { markupMovies } from '../markup/hero-markup';
 import { paginationMobile, paginationTabDesk } from '../markup/pagination-markup';
-const ulTag = document.querySelector('.pagination__list');
-const cardMarkup = document.querySelector('.gallery__list');
-const logo = document.querySelector('.header-logo-link');
-const home = document.querySelector('.js-home');
-const library = document.querySelector('.js-my-library-btn');
-const searchForm = document.querySelector('.js-search-form');
+const refs = {
+  ulTag: document.querySelector('.pagination__list'),
+  cardMarkup: document.querySelector('.gallery__list'),
+  logo: document.querySelector('.header-logo-link'),
+  home: document.querySelector('.js-home'),
+  library: document.querySelector('.js-my-library-btn'),
+  searchForm: document.querySelector('.js-search-form'),
+};
+
 const movieService = new MovieService();
 
-searchForm.addEventListener('submit', onSearchP);
+refs.searchForm.addEventListener('submit', onSearchP);
 
 function onSearchP(e) {
-  ulTag.classList.add('visually-hidden');
+  refs.ulTag.classList.add('visually-hidden');
 }
 
 movieService.fetchMovies().then(data => {
@@ -21,19 +24,19 @@ movieService.fetchMovies().then(data => {
   window.totalPages = totalPages;
 
   window.addEventListener('resize', onPagination);
-  ulTag.addEventListener('click', onPages);
-  logo.addEventListener('click', onResetPage);
-  home.addEventListener('click', onResetPage);
-  library.addEventListener('click', onHidePagination);
+  refs.ulTag.addEventListener('click', onPages);
+  refs.logo.addEventListener('click', onResetPage);
+  refs.home.addEventListener('click', onResetPage);
+  refs.library.addEventListener('click', onHidePagination);
 
   function onHidePagination() {
-    ulTag.classList.add('visually-hidden');
+    refs.ulTag.classList.add('visually-hidden');
   }
 
   function onResetPage(e) {
-    ulTag.classList.remove('visually-hidden');
+    refs.ulTag.classList.remove('visually-hidden');
     movieService.page = 1;
-    cardMarkup.innerHTML = '';
+    refs.cardMarkup.innerHTML = '';
     onPagination();
   }
 
@@ -42,13 +45,13 @@ movieService.fetchMovies().then(data => {
 
     async function makeNewPage() {
       movieService.page = pageN;
-      cardMarkup.innerHTML = '';
+      refs.cardMarkup.innerHTML = '';
       const response = await movieService.fetchMovies();
 
       if (window.matchMedia('(max-width: 367px)').matches) {
-        paginationMobile(totalPages, pageN, ulTag);
+        paginationMobile(totalPages, pageN, refs.ulTag);
       } else {
-        paginationTabDesk(totalPages, pageN, ulTag);
+        paginationTabDesk(totalPages, pageN, refs.ulTag);
       }
       markupMovies(response.results);
     }
@@ -68,9 +71,9 @@ movieService.fetchMovies().then(data => {
 
   function onPagination() {
     if (window.matchMedia('(max-width: 367px)').matches) {
-      paginationMobile(totalPages, page, ulTag);
+      paginationMobile(totalPages, page, refs.ulTag);
     } else {
-      paginationTabDesk(totalPages, page, ulTag);
+      paginationTabDesk(totalPages, page, refs.ulTag);
     }
   }
 });

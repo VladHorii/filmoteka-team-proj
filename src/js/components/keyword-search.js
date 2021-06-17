@@ -69,7 +69,6 @@ export function onSearch(e) {
 
       function onPagination() {
         if (window.matchMedia('(max-width: 367px)').matches) {
-          console.log(refs.paginationKey);
           paginationMobile(totalPages, page, refs.paginationKey);
         } else {
           paginationTabDesk(totalPages, page, refs.paginationKey);
