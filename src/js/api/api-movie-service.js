@@ -15,17 +15,27 @@ export class MovieService {
   }
 
   async fetchMovies() {
-    spinner.open();
-    const response = await axios.get(`/trending/movie/day?api_key=${this.key}&page=${this.page}`);
-    spinner.close();
-    return response.data;
+    try {
+      spinner.open();
+      const response = await axios.get(`/trending/movie/day?api_key=${this.key}&page=${this.page}`);
+      return response.data;
+    } catch (error) {
+      throw new Error(error);
+    } finally {
+      spinner.close();
+    }
   }
 
   async fetchGenre() {
-    spinner.open();
-    const response = await axios.get(`/genre/movie/list?api_key=${this.key}&language=en-US`);
-    spinner.close();
-    return response.data;
+    try {
+      spinner.open();
+      const response = await axios.get(`/genre/movie/list?api_key=${this.key}&language=en-US`);
+      return response.data;
+    } catch (error) {
+      throw new Error(error);
+    } finally {
+      spinner.close();
+    }
   }
 
   async fetchMovieInfo() {
@@ -36,6 +46,8 @@ export class MovieService {
       return response.data;
     } catch (error) {
       throw new Error(error);
+    } finally {
+      spinner.close();
     }
   }
 
@@ -49,6 +61,8 @@ export class MovieService {
       return response.data;
     } catch (error) {
       throw new Error(error);
+    } finally {
+      spinner.close();
     }
   }
 
