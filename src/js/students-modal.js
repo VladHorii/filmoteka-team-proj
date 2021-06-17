@@ -6,14 +6,8 @@ const refs = {
   studentsModal: document.querySelector('[data-students-modal]'),
 };
 
-refs.openStudentsModal.addEventListener('click', function () {
-  onClickStudentsModal();
-  disableBodyScroll(refs.studentsModal);
-});
-refs.closeStudentsModal.addEventListener('click', function () {
-  onClickStudentsModal();
-  enableBodyScroll(refs.studentsModal);
-});
+refs.openStudentsModal.addEventListener('click', onClickStudentsModal);
+refs.closeStudentsModal.addEventListener('click', onClickStudentsModal);
 
 function onClickStudentsModal() {
   refs.studentsModal.classList.toggle('visually-hidden');
