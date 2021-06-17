@@ -6,10 +6,10 @@ const cardMarkup = document.querySelector('.gallery__list');
 const logo = document.querySelector('.header-logo-link');
 const home = document.querySelector('.js-home');
 const library = document.querySelector('.js-my-library-btn');
-const searchForm = document.querySelector('.js-search-form');
+//const searchForm = document.querySelector('.js-search-form');
 const movieService = new MovieService();
 
-searchForm.addEventListener('submit', onSearchP);
+// searchForm.addEventListener('submit', onSearchP);
 
 /*function onSearchP() {
   movieService.fetchMoviesWithQuery().then(r => console.log(r.total_pages));
