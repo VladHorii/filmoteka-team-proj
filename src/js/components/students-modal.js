@@ -1,4 +1,4 @@
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+import { disableBodyScroll, enableBodyScroll } from '../body-scroll-lock';
 
 const refs = {
   openStudentsModal: document.querySelector('[data-students-modal-open]'),

@@ -14,7 +14,6 @@ const refs = {
 
 refs.onHomeBtn.classList.add('is-current');
 refs.libraryBtnContainer.classList.add('display-none');
-// refs.onWatchedBtn.classList.add('current-btn');
 
 class CurrentPage {
   homeBtn() {
@@ -47,7 +46,6 @@ function onLibraryBtnClassList() {
   refs.libraryBtnContainer.classList.add('btn-flex');
   refs.onHomeBtn.classList.remove('is-current');
   refs.header.classList.add('header-library');
-  // queueBtnClick();
 
   setWatchedAndQueueMarkup();
 }

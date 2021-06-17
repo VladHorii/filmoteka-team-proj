@@ -28,27 +28,6 @@ async function setMarkup(folder) {
 async function setWatchedAndQueueMarkup() {
   setMarkup('watched');
   setMarkup('queue');
-  // const list = new Set();
-
-  // document.querySelector('.gallery__list').textContent = '';
-
-  // const watchedList = await addToDataBase.getList('watched');
-  // const queueList = await addToDataBase.getList('queue');
-
-  // for (const key in watchedList) {
-  //   list.add(watchedList[key]);
-  // }
-  // for (const key in queueList) {
-  //   list.add(queueList[key]);
-  // }
-
-  // const movies = [];
-  // list.forEach(async element => {
-  //   movieService.id = element;
-  //   const film = await movieService.fetchMovieInfo();
-  //   movies.push(film);
-  // });
-  // markupMovies(movies, true);
 }
 
 export { setWatchedAndQueueMarkup, setMarkup };

@@ -2,6 +2,11 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 
+import { Spinner } from './components/spinner';
+
+const spinner = new Spinner();
+// spinner.open();
+
 // import shortid from 'shortid';
 
 export default class Authorization {
@@ -40,8 +45,6 @@ export default class Authorization {
 
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 
-    // document.querySelector('.auth-status').textContent = `Вы не авторизованы`;
-
     firebase.auth().onAuthStateChanged(this.setUser.bind(this));
   }
 
@@ -51,7 +54,6 @@ export default class Authorization {
         name: await this.getUserName(),
         uid: this.getUserID(),
       };
-      // document.querySelector('.auth-status').textContent = `Вы авторизованы как ${this.user.name}`;
       document.querySelector('.js-auth-btn').parentNode.classList.add('visually-hidden');
       document.querySelector('.js-logout-btn').parentNode.classList.remove('visually-hidden');
       document.querySelector('.js-my-library-btn').parentNode.classList.remove('visually-hidden');
@@ -60,8 +62,8 @@ export default class Authorization {
   }
 
   async register(email, name, pass) {
-    console.log('REGISTER', email, name, pass);
     try {
+      spinner.open();
       await firebase.auth().createUserWithEmailAndPassword(email, pass);
 
       const uid = this.getUserID();
@@ -71,24 +73,27 @@ export default class Authorization {
       });
       this.isAuth = true;
       this.setUser();
+      spinner.close();
       return await email;
     } catch (error) {
-      console.log(error);
       return error;
+    } finally {
+      spinner.close();
     }
   }
 
   async auth(email, pass) {
     try {
+      spinner.open();
       await firebase.auth().signInWithEmailAndPassword(email, pass);
 
       await this.setUser();
 
-      // console.log(`Вы авторизовались как ${this.user.name}`);
       return await email;
     } catch (error) {
-      console.log(error);
       return error;
+    } finally {
+      spinner.close();
     }
   }
 
@@ -100,76 +105,4 @@ export default class Authorization {
     document.querySelector('.js-logout-btn').parentNode.classList.add('visually-hidden');
     document.querySelector('.js-my-library-btn').parentNode.classList.add('visually-hidden');
   }
-}
-
-// document
-//   .querySelector('.modal-form__signup .button')
-//   .addEventListener('click', authorization.register.bind(authorization));
-// document
-//   .querySelector('.js-auth-submit-logout')
-//   .addEventListener('click', authorization.logout.bind(authorization));
-
-// document.querySelector('.modal-form__signin .button').addEventListener('click', e => {
-//   e.preventDefault();
-//   authorization.auth.bind(authorization);
-// });
-
-// document.querySelector('.js-auth-submit-myname').addEventListener('click', async e => {
-//   console.log(authorization.user);
-// });
-//
-//
-//
-//
-//
-// Добавление и просмотр списка просмотренных фильмов
-//
-
-// document.querySelector('.js-lib-add-watched').addEventListener('click', e => {
-//   const uid = authorization.user.uid;
-//   const sid = shortid.generate();
-//   firebase.database().ref(`/users/${uid}/info/watched`).push(sid);
-
-//   console.log('click to add-watched');
-// });
-// document.querySelector('.js-lib-add-queue').addEventListener('click', e => {
-//   const uid = authorization.user.uid;
-//   const sid = shortid.generate();
-//   firebase.database().ref(`/users/${uid}/info/queue`).push(sid);
-
-//   console.log('click to add-queue');
-// });
-// document.querySelector('.js-lib-queue').addEventListener('click', async e => {
-//   const uid = authorization.user.uid;
-//   const queue = (await firebase.database().ref(`/users/${uid}/info/queue`).once('value')).val();
-
-//   for (let key in queue) {
-//     console.log(queue[key]);
-//   }
-//   console.log('click to queue');
-// });
-// document.querySelector('.js-lib-watched').addEventListener('click', async e => {
-//   const uid = authorization.user.uid;
-//   const watched = (await firebase.database().ref(`/users/${uid}/info/watched`).once('value')).val();
-
-//   for (let key in watched) {
-//     console.log(watched[key]);
-//   }
-
-//   console.log('click to watched');
-// });
-{
-  /* <p class="auth-status">1</p>
-<label>email<input class="auth-email" id="auth-email" type="text" /></label>
-<label>name<input class="auth-name" id="auth-name" type="text" /></label>
-<label>pass<input class="auth-pass" id="auth-pass" type="text" /></label>
-<button class="js-auth-submit-register" type="button">reg</button>
-<button class="js-auth-submit-auth" type="button">auth</button>
-<button class="js-auth-submit-myname" type="button">getmyname</button>
-<button class="js-auth-submit-logout" type="button">logout</button>
-<div></div>
-<button class="js-lib-add-watched" type="button">Add to watched</button>
-<button class="js-lib-add-queue" type="button">Add to queue</button>
-<button class="js-lib-watched" type="button">watched</button>
-<button class="js-lib-queue" type="button">queue</button> */
 }
