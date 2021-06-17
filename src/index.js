@@ -1,4 +1,5 @@
 import './sass/main.scss';
+
 import './js/components/toggleHeader';
 import './js/components/registration-form';
 import './js/api/api-movie-service';
