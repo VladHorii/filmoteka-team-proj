@@ -1,70 +1,16 @@
-import { MovieService } from './api-movie-service';
-import { getGenre, makeMarkup } from './hero-markup';
-const ulTag = document.querySelector('.pagination__list');
-const galleryWrapper = document.querySelector('.gallery__list');
-const movieService = new MovieService();
-
-async function markupMovies() {
-  const movieData = await movieService.fetchMovies().then(r => r.results);
-  const genreData = await movieService.fetchGenre().then(r => r.genres);
-  makeMarkup(movieData, genreData);
-  getGenre(genreData);
-}
-
-movieService.fetchMovies().then(data => {
-  let totalPages = data.total_pages;
-  let page = data.page;
-  window.totalPages = totalPages;
-
-  window.addEventListener('resize', onPagination);
-  ulTag.addEventListener('click', onPages);
-
-  function onPages(e) {
-    let pageN = +e.target.dataset.number;
-
-    function makeNewPage() {
-      movieService.page = pageN;
-      galleryWrapper.innerHTML = '';
-      markupMovies();
-    }
-
-    if (e.target.classList.contains('btn-next')) {
-      movieService.nextPage();
-      makeNewPage();
-    } else if (e.target.classList.contains('btn-prev')) {
-      movieService.previousPage();
-      makeNewPage();
-    } else if (e.target.classList.contains('number')) {
-      makeNewPage();
-    }
-  }
-
-  onPagination();
-
-  function onPagination() {
-    if (window.matchMedia('(max-width: 367px)').matches) {
-      paginationMobile(totalPages, page);
-    } else {
-      paginationTabDesk(totalPages, page);
-    }
-  }
-});
-
-function paginationMobile(totalPages, page) {
+function paginationMobile(totalPages, page, container) {
   let liTag = '';
   let activeLi;
   let beforePages = page - 2;
   let afterPages = page + 2;
 
   if (page < 1) {
-    liTag += `<li class="number" data-number="1" onclick="paginationMobile(totalPages, 1)">1</li>`;
+    liTag += `<li class="number" data-number="1">1</li>`;
   }
 
   if (page > 1) {
     //show the next button if the page value is greater than 1
-    liTag += `<li class="btn-arrow btn-prev" data-number="${
-      page - 1
-    }" onclick="paginationMobile(totalPages, ${page - 1})">&#10094;</li>`;
+    liTag += `<li class="btn-arrow btn-prev" data-number="${page - 1}">&#10094;</li>`;
   }
 
   // how many li show before the current li
@@ -113,20 +59,18 @@ function paginationMobile(totalPages, page) {
       activeLi = '';
     }
 
-    liTag += `<li class="number ${activeLi}" data-number="${pageLength}" onclick="paginationMobile(totalPages, ${pageLength})">${pageLength}</li>`;
+    liTag += `<li class="number ${activeLi}" data-number="${pageLength}">${pageLength}</li>`;
   }
 
   //show the next button if the page value is less than totalPage
   if (page < totalPages) {
-    liTag += `<li class="btn-arrow btn-next" data-number="${
-      page + 1
-    }" onclick="paginationMobile(totalPages, ${page + 1})">&#10095;</li>`;
+    liTag += `<li class="btn-arrow btn-next" data-number="${page + 1}">&#10095;</li>`;
   }
 
-  ulTag.innerHTML = liTag;
+  container.innerHTML = liTag;
 }
 
-function paginationTabDesk(totalPages, page) {
+function paginationTabDesk(totalPages, page, container) {
   let liTag = '';
   let activeLi;
   let beforePages = page - 2;
@@ -134,14 +78,12 @@ function paginationTabDesk(totalPages, page) {
 
   //show the next button if the page value is greater than 1
   if (page > 1) {
-    liTag += `<li class="btn-arrow btn-prev" data-number="${
-      page - 1
-    }" onclick="paginationTabDesk(totalPages, ${page - 1})">	
-    	&#10094;</li>`;
+    liTag += `<li class="btn-arrow btn-prev" data-number="${page - 1}">
+          &#10094;</li>`;
   }
 
   if (page > 3 && totalPages > 7) {
-    liTag += `<li class="number" data-number="1" onclick="paginationTabDesk(totalPages, 1)">1</li>`;
+    liTag += `<li class="number" data-number="1">1</li>`;
   }
 
   //if page value is greater than 4 then add this (...) after the first li or page
@@ -207,26 +149,26 @@ function paginationTabDesk(totalPages, page) {
       activeLi = '';
     }
 
-    liTag += `<li class="number ${activeLi}" data-number="${pageLength}" onclick="paginationTabDesk(totalPages, ${pageLength})">${pageLength}</li>`;
+    liTag += `<li class="number ${activeLi}" data-number="${pageLength}">${pageLength}</li>`;
   }
 
   if (page < totalPages - 2 && totalPages > 7) {
     if (page < totalPages - 3 && totalPages > 8) {
       liTag += `<li class="dots">...</li>`;
     }
-    liTag += `<li class="number" data-number="${totalPages}" onclick="paginationTabDesk(totalPages, ${totalPages})">${totalPages}</li>`;
+    liTag += `<li class="number" data-number="${totalPages}">${totalPages}</li>`;
   }
 
   //show the next button if the page value is less than totalPage
   if (page < totalPages) {
-    liTag += `<li class="btn-arrow btn-next" data-number="${
-      page + 1
-    }" onclick="paginationTabDesk(totalPages, ${page + 1})">	
-    &#10095;</li>`;
+    liTag += `<li class="btn-arrow btn-next" data-number="${page + 1}">
+      &#10095;</li>`;
   }
 
-  ulTag.innerHTML = liTag;
+  container.innerHTML = liTag;
 }
 
 window.paginationMobile = paginationMobile;
 window.paginationTabDesk = paginationTabDesk;
+
+export { paginationMobile, paginationTabDesk };

@@ -6,7 +6,7 @@
   />
 </head>
 
-<header id="page-header" class="header header-home">
+<header id="page-header" class="header">
   <!-- switch class header-library -->
   <div class="header-container container">
     <include src="./partials/theme-switch.html"></include>
@@ -31,7 +31,7 @@
 ======= -->
     <nav class="header-navigation">
       <div class="header-logo">
-        <a class="header-logo-link logo" href="#home" lang="en" data-link>
+        <a class="header-logo-link logo" href="./index" lang="en">
           <svg class="header-logo-icon animate__animated animate__fadeInUp">
             <use href="./images/sprite.svg#icon-header-film"></use>
           </svg>
@@ -41,11 +41,11 @@
 
       <!-- <div class="header-menu"> -->
       <ul class="header-navigation-list" id="page-nav">
-        <li class="header-navigation-item">
-          <a class="header-navigation-page is-current link-nav" href="#home" data-link>home</a>
+        <li class="header-navigation-item js-home">
+          <a class="header-navigation-page link-nav" id="btn-home" href="#">home</a>
         </li>
         <li class="header-navigation-item visually-hidden">
-          <a class="header-navigation-page js-my-library-btn link-nav" href="#library" data-link>
+          <a id="btn-library" class="header-navigation-page js-my-library-btn link-nav" href="#">
             my library
           </a>
         </li>
@@ -59,13 +59,14 @@
       <!-- </div> -->
     </nav>
 
-    <form class="header-search-form" id="search-form">
+    <form class="header-search-form js-search-form" id="search-form">
       <input
+        id="serch-input"
         class="header-search-field"
         type="text"
         name="query"
         autocomplete="off"
-        placeholder="Поиск фильмов"
+        placeholder="Search Movies"
       />
       <svg class="header-search-icon">
         <use href="./images/sprite.svg#icon-header-search"></use>
@@ -74,9 +75,9 @@
     <div class="header-notification visually-hidden">
       Search result not successful. Enter the correct movie name
     </div>
-    <div class="btn-flex header__actions">
-      <button type="button" class="btn current-btn">watched</button>
-      <button type="button" class="btn">queue</button>
+    <div id="library-container" class="library-container">
+      <button id="watched" type="button" class="btn watched">watched</button>
+      <button id="queue" type="button" class="btn queue">queue</button>
     </div>
   </div>
 </header>
