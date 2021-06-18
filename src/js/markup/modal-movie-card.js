@@ -8,13 +8,23 @@ const auth = new Authorization();
 
 import { AddToDataBase } from '../components/add-to-base';
 
-import { defaults, success, error } from '@pnotify/core';
+import { defaults, success, error, defaultModules } from '@pnotify/core';
+import * as PNotifyAnimate from '@pnotify/animate';
+import * as PNotifyMobile from '@pnotify/mobile';
+
 import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/Material.css';
+import '@pnotify/mobile/dist/PNotifyMobile.css';
+
+defaultModules.set(PNotifyMobile, {});
+defaultModules.set(PNotifyAnimate, { inClass: 'fadeInDown', outClass: 'fadeOutUp' });
+// defaults.inClass = 'fadeInDown';
+// defaults.outClass = 'fadeOutUp';
 
 defaults.delay = 4000;
 defaults.styling = 'material';
 defaults.icons = 'material';
+
 // let notice = null;
 
 const addToDataBase = new AddToDataBase();
@@ -35,6 +45,19 @@ function updateButton(isExits, btnRef, btnName) {
 function addRemoveFilm(folder, isExits, filmID) {
   if (isExits) {
     addToDataBase.removeFrom(folder, filmID);
+
+    // notice({
+    //   text: `Фильм удалён из списка <${folder}>`,
+    //   modules: new Map([
+    //     ...defaultModules,
+    //     [
+    //       PNotifyMobile,
+    //       {
+    //         // Mobile Module Options
+    //       },
+    //     ],
+    //   ]),
+    // });
 
     success({
       text: `Фильм удалён из списка <${folder}>`,
