@@ -1,4 +1,4 @@
-import { disableBodyScroll, enableBodyScroll } from '../body-scroll-lock';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 const refs = {
   openStudentsModal: document.querySelector('[data-students-modal-open]'),
@@ -14,11 +14,12 @@ function onClickStudentsModal() {
   toggleScrollTopBtn();
 
   if (!refs.studentsModal.classList.contains('visually-hidden')) {
-    disableBodyScroll(refs.closeStudentsModal);
+    disableBodyScroll(refs.studentsModal);
+    // disableBodyScroll(refs.studentsModal);
     window.addEventListener('keydown', onEscKeyPress);
   }
   if (refs.studentsModal.classList.contains('visually-hidden')) {
-    enableBodyScroll(refs.closeStudentsModal);
+    enableBodyScroll(refs.studentsModal);
     window.removeEventListener('keydown', onEscKeyPress);
   }
 }
@@ -29,7 +30,7 @@ function onBackdropClick(event) {
   if (event.currentTarget === event.target) {
     refs.studentsModal.classList.add('visually-hidden');
     toggleScrollTopBtn();
-    enableBodyScroll(refs.closeStudentsModal);
+    enableBodyScroll(refs.studentsModal);
   }
 }
 
@@ -37,7 +38,7 @@ function onEscKeyPress(event) {
   if (event.code === 'Escape') {
     refs.studentsModal.classList.add('visually-hidden');
     toggleScrollTopBtn();
-    enableBodyScroll(refs.closeStudentsModal);
+    enableBodyScroll(refs.studentsModal);
   }
 }
 
