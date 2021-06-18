@@ -42,7 +42,6 @@ export class MovieService {
     try {
       spinner.open();
       const response = await axios.get(`/movie/${this.id}?api_key=${this.key}&language=en-US`);
-      spinner.close();
       return response.data;
     } catch (error) {
       throw new Error(error);
@@ -54,10 +53,12 @@ export class MovieService {
   async fetchMoviesWithQuery() {
     try {
       spinner.open();
-      const response = await axios.get(
-        `/search/movie/?api_key=${this.key}&query=${this.searchQuery}&page=${this.page}&language=en-US`,
+      const response = await fetch(
+        `https://api.themoviedb.org/3/search/movie/?api_key=${this.key}&query=${this.searchQuery}&page=${this.page}&language=en-US`,
       );
-      spinner.close();
+      // const response = await axios.get(
+      //   `/search/movie/?api_key=${this.key}&query=${this.searchQuery}&page=${this.page}&language=en-US`,
+      // );
       return response.data;
     } catch (error) {
       throw new Error(error);
