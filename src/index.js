@@ -1,4 +1,5 @@
 import './sass/main.scss';
+import 'material-design-icons/iconfont/material-icons.css';
 
 import './js/components/toggleHeader';
 import './js/components/registration-form';
